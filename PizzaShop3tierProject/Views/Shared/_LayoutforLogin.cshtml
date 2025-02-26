@@ -1,0 +1,31 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/PizzaShopApp.styles.css" asp-append-version="true" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid row align-items-center justify-content-center">
+        <div class="left-section col-6 text-center d-none d-lg-block">
+            <img src="~/images/dominos_background.jpg" class="d-block w-100 h-100" alt="hero-image">
+        </div>
+        <div class="right-section col-lg-6 col-md-12 col-sm-12 col-12 ">
+            <div class="logo-container d-flex justify-content-center align-items-center mb-5">
+                <img src="~/images/logos/pizzashop_logo.png" alt="header-logo">
+                <h1 class="mb-0 ">PIZZASHOP</h1>
+            </div>
+             @RenderBody()
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

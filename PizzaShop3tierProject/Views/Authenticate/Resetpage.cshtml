@@ -1,0 +1,68 @@
+@{
+    ViewData["titel"]="reset page";
+    Layout="~/Views/Shared/_LayoutForLogin.cshtml";
+}
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <div class="text-md-left text-sm-center text-center">
+                <h4 class="mb-3">Reset Password</h4>
+    </div>    
+
+    <form class="d-flex flex-column was-validated">
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" name="Password" placeholder="New Password" id="pass" aria-label="Password" aria-describedby="basic-addon1" required>
+                    <span class="input-group-text" id="eye-icon">
+                        <i class="fa fa-eye" id="eye" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                  <div class="input-group mb-3">
+                    <input type="password" class="form-control" name="conf-pass" placeholder="Confirm New Password" id="conf-pass" aria-label="Password" aria-describedby="basic-addon1" required>
+                    <span class="input-group-text" id="eye-icon1">
+                        <i class="fa fa-eye" id="eye1" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                
+                <button class="btn btn-nonprimary" id="submit" type="submit">Submit</button>
+                <div class="mt-2 text-center">
+                    <a href="/Authenticate/Index">Back To Login</a>
+                </div>
+    </form>
+    <script>
+        @* validating password and conf password *@
+            $("#submit").click((e) => {
+            e.preventDefault();
+
+            var passwordPattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@@$%^&*-]).{8,}$";
+
+            @* taking input by id *@
+            var pass = $("#pass").val();
+            var cnfpass = $("#conf-pass").val();
+            
+            @* console.log(pass); *@
+            @* console.log(cnfpass); *@
+
+            if(pass != cnfpass){
+                alert("Please Enter correct password in Confirm password field.");
+            }
+            else{
+                $.ajax({
+                        url: "/Authenticate/Resetpage",
+                        type:"POST",
+                        data:{
+                            password : pass
+                        },
+                        success: (response) => {
+                            if(response.success){
+                                alert(response.message);
+                            }else{
+                                alert(response.message);
+                            }
+                        },
+                        error: ()=>{
+                        }
+                    });
+            }
+            })
+
+    </script>
