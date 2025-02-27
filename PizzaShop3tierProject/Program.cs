@@ -45,6 +45,9 @@ builder.Services.AddDbContext<PizzaShopDbContext>(options => options.UseNpgsql(b
 builder.Services.AddScoped<IAuthenticate,Authenticate>();
 builder.Services.AddScoped<IUser,Userop>();
 builder.Services.AddScoped<IUserservice,Userservice>();
+builder.Services.AddScoped<IRoleandPermission,RoleandPermission>();
+builder.Services.AddScoped<IRoleandPermissionServices,RoleandPermissionServices>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

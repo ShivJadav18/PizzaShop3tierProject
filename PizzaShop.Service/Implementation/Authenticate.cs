@@ -31,7 +31,8 @@ public class Authenticate : IAuthenticate{
         var claims = new[] {
                 new Claim(ClaimTypes.Role , role),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim("UserName",userobj.Username)
+                new Claim("UserName",userobj.Username),
+                new Claim("Userid",userobj.UserId.ToString())
             };
 
         var token = GenerateJSONWebToken(claims);
