@@ -17,19 +17,25 @@
                     <form class="w-100 col" asp-action="Edit" asp-controller="User" asp-route-id="@Model.UserId"  method="post">
                         <input type="hidden" asp-for="UserId" name="UserId"/>
                         <div class="row mb-3">
-                            <div class="form-floating col">
+                            <div class="col">
+                                <div class="form-floating">
                                 <input type="text" asp-for="Firstname" class="form-control" id="floatingInput" placeholder="First Name" name="Firstname">
                                 <label for="floatingInput">First Name</label>
+                                </div>
                             </div>
-                            <div class="form-floating col">
-                                <input type="text" asp-for="Lastname" class="form-control p-3" placeholder="Last Name" name="Lastname"/>
+                            <div class="col">
+                                <div class="form-floating">
+                                <input type="text" asp-for="Lastname" class="form-control" placeholder="Last Name" name="Lastname"/>
                                 <label for="floatingInput1">Last Name</label>
+                                </div>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <div class="form-floating col">
+                            <div class="col">
+                                <div class="form-floating">
                                 <input type="email" class="form-control" asp-for="Email" id="floatingInput" placeholder="name@example.com" name="Email">
                                 <label for="floatingInput">Email</label>
+                                </div>
                             </div>
                             <div class="dropdown col h-100">
                                 <select class="form-select"class="h-100" asp-for="RoleId" aria-label="Default select example" name="RoleId">                       
@@ -40,9 +46,11 @@
                               </div>
                         </div>
                         <div class="row mb-3">
-                            <div class="form-floating mb-3 col">
+                            <div class="mb-3 col">
+                                <div class="form-floating">
                                 <input type="text" class="form-control" id="floatingInput" asp-for="Username" placeholder="User Name" name="Username">
                                 <label for="floatingInput">User Name</label>
+                                </div>
                             </div>
                              <div class="dropdown col h-100">
                            <select class="form-select col h-100" asp-for="Status" aria-label="Default select example" name="Status">                       
@@ -76,17 +84,23 @@
                               </div>
                         </div>
                         <div class="row mb-5">
-                            <div class="form-floating col">
-                                <input type="text" class="form-control p-3" asp-for="Zipcode" placeholder="Zipcode" name="Zipcode"/>
+                            <div class="col">
+                                <div class="form-floating">
+                                <input type="text" class="form-control" asp-for="Zipcode" placeholder="Zipcode" name="Zipcode"/>
                                 <label for="floatingInput1">Zipcode</label>
+                                </div>
                             </div>
-                            <div class="form-floating col">
-                                <input type="text" class="form-control p-3" asp-for="Address" placeholder="Address" name="Address"/>
+                            <div class="col">
+                                <div class="form-floating">
+                                <input type="text" class="form-control" asp-for="Address" placeholder="Address" name="Address"/>
                                 <label for="floatingInput1">Address</label>
+                                </div>
                             </div>
-                            <div class="form-floating col">
-                                <input type="text" class="form-control p-3" asp-for="Contactnumber" placeholder="Phone" name="Contactnumber"/>
+                            <div class="col">
+                                <div class="form-floating">
+                                <input type="text" class="form-control" asp-for="Contactnumber" placeholder="Phone" name="Contactnumber"/>
                                 <label for="floatingInput1">Phone</label>
+                                </div>
                             </div>
                         </div>
                         <div class="row w-100 align-items-center">

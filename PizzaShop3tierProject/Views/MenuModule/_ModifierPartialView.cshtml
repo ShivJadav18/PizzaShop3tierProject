@@ -1,0 +1,285 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+
+<div class="col-2 categories-list-sec">
+    <div class="header d-flex justify-content-between align-items-center w-100" id="xyz">
+        <div class="d-flex justify-content-between w-100">
+            <h5 class="text-center Category">Modifier Group</h5>
+            <div class="btn add-Category" data-bs-target="#AddModifierGroup" data-bs-toggle="modal">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+            </div>
+        </div>
+        <div class="modal fade" id="AddModifierGroup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header b-0">
+                        <h5 class="modal-title" id="staticBackdropLabel">Add Modifier Group</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="ModifierGroupName"
+                                    placeholder="Modifier Group Name">
+                                <label for="ModifierGroupName">Name</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <textarea type="text" class="form-control" id="ModifierGroupDescription"
+                                    placeholder="Modifier Group Description"></textarea>
+                                <label for="ModifierGroupDescription">Description</label>
+                            </div>
+                            <p data-bs-target="#AddExistingModifierGroup" data-bs-toggle="modal"
+                                class="text-decoration-none" id="Add-existing-group">+ Add Existing Modifier Group.</p>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-nonprimary imp">Save</button>
+                        <button type="button" class="btn btn-nonsecondary no-imp"
+                            data-bs-dismiss="modal">Cancle</button>
+                    </div>
+            </div>
+            </div>
+        </div>
+        <div class="modal fade" id="AddExistingModifierGroup" data-bs-backdrop="static" data-bs-keyboard="false"
+            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header b-0">
+                        <h5 class="modal-title" id="staticBackdropLabel">Select Existing Modifier</h5>
+                        <button type="button" class="btn-close" data-bs-target="#AddModifierGroup"
+                            data-bs-toggle="modal" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="w-50">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="SearchMOdifierGroupName"
+                                    placeholder="Search Modifier Group Name">
+                                <label for="SearchMOdifierGroupName">Search</label>
+                            </div>
+                        </div>
+                        <table class="table table-borderless">
+                            <thead>
+                                <th class="">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" value="" id="p1" />
+                                        <label for="p1" class="header-per form-check-label">
+                                            <h3 class="header-per">Name</h3>
+                                        </label>
+                                    </div>
+                                </th>
+                                <th class="text-center">Unit</th>
+                                <th class="text-center">Rate</th>
+                                <th class="text-center">Quantity</th>
+
+                            </thead>
+                            <tr>
+                                <td class="">
+                                    <div class="form-check  mb-3">
+                                        <input type="checkbox" class="form-check-input" value="" id="p2" />
+                                        <label for="p2" class=" form-check-label">Panjabi Tadaka Sandwich</label>
+                                    </div>
+                                </td>
+                                <td class="text-center">pcs</td>
+                                <td class="text-center">200</td>
+                                <td class="text-center">1</td>
+
+                            </tr>
+                            <tr>
+                                <td class="">
+                                    <div class="form-check mb-3">
+                                        <input type="checkbox" class="form-check-input" value="" id="p2" />
+                                        <label for="p2" class=" form-check-label">Chicken Sandwich</label>
+                                    </div>
+                                </td>
+                                <td class="text-center">pcs</td>
+                                <td class="text-center">200</td>
+                                <td class="text-center">2</td>
+
+                            </tr>
+                            <tr>
+                                <td class="">
+                                    <div class="form-check mb-3">
+                                        <input type="checkbox" class="form-check-input" value="" id="p2" />
+                                        <label for="p2" class=" form-check-label">Chease Sandwich</label>
+                                    </div>
+                                </td>
+                                <td class="text-center">pcs</td>
+                                <td class="text-center">150</td>
+                                <td class="text-center">2</td>
+
+                            </tr>
+                            <tr>
+                                <td class="">
+                                    <div class="form-check mb-3">
+                                        <input type="checkbox" class="form-check-input" value="" id="p2" />
+                                        <label for="p2" class=" form-check-label">Normal Sandwich</label>
+                                    </div>
+                                </td>
+                                <td class="text-center">pcs</td>
+                                <td class="text-center">180</td>
+                                <td class="text-center">1</td>
+
+                            </tr>
+                            <tr>
+                                <td class="">
+                                    <div class="form-check mb-3">
+                                        <input type="checkbox" class="form-check-input" value="" id="p2" />
+                                        <label for="p2" class=" form-check-label">Aaloo Sandwich</label>
+                                    </div>
+                                </td>
+                                <td class="text-center">pcs</td>
+                                <td class="text-center">190</td>
+                                <td class="text-center">1</td>
+
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-start">
+                        <button type="button" class="btn btn-nonprimary imp">Add</button>
+                        <button type="button" class="btn btn-nonsecondary no-imp" data-bs-target="#AddModifierGroup"
+                            data-bs-toggle="modal">Cancle</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="sidebar">
+        <div class="list-group list-group-flush" id="categories">
+            <a href="" class="list-group-item list-group-item-action">
+                <i class="fa fa-th m-2" aria-hidden="true"></i>sandwich
+            </a>
+            <a href="" class="list-group-item list-group-item-action">
+                <i class="fa fa-th m-2" aria-hidden="true"></i>Pasta
+            </a>
+            <a href="" class="list-group-item list-group-item-action">
+                <i class="fa fa-th m-2" aria-hidden="true"></i>dfsfpitizers
+            </a>
+            <a href="" class="list-group-item list-group-item-action">
+                <i class="fa fa-th m-2" aria-hidden="true"></i>Salads
+            </a>
+            <a href="" class="list-group-item list-group-item-action">
+                <i class="fa fa-th m-2" aria-hidden="true"></i>Dips and Sauces
+            </a>
+            <a href="" class="list-group-item list-group-item-action">
+                <i class="fa fa-th m-2" aria-hidden="true"></i>Pizza
+            </a>
+            <a href="" class="list-group-item list-group-item-action">
+                <i class="fa fa-th m-2" aria-hidden="true"></i>Deserts
+            </a>
+            <a href="" class="list-group-item list-group-item-action">
+                <i class="fa fa-th m-2" aria-hidden="true"></i>Burgers
+            </a>
+        </div>
+    </nav>
+</div>
+<div class="items-list-sec col">
+    <div class="header">
+        <h5 class="Category">Modifiers</h5>
+    </div>
+    <form class="d-flex justify-content-end">
+        <div class="input-group w-25 m-2">
+            <input type="text" class="form-control" id="search" placeholder="Search" />
+            <span class="input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span>
+        </div>
+        <div class="btn delete-btn m-2">
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+        </div>
+        <div class="btn imp m-2">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            New Modifier
+        </div>
+    </form>
+    <table class="table table-borderless">
+        <thead>
+            <th class="">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" value="" id="p1" />
+                    <label for="p1" class="header-per form-check-label">
+                        <h3 class="header-per">Name</h3>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center">Unit</th>
+            <th class="text-center">Rate</th>
+            <th class="text-center">Quantity</th>
+            <th class="text-center">Action</th>
+        </thead>
+        <tr>
+            <td class="">
+                <div class="form-check  mb-3">
+                    <input type="checkbox" class="form-check-input" value="" id="p2" />
+                    <label for="p2" class=" form-check-label">Panjabi Tadaka Sandwich</label>
+                </div>
+            </td>
+            <td class="text-center">pcs</td>
+            <td class="text-center">200</td>
+            <td class="text-center">1</td>
+            <td class="text-center">
+                <i class="fa fa-pencil m-1" aria-hidden="true"></i><i class="fa fa-trash" aria-hidden="true"
+                    data-bs-toggle="modal" data-bs-target="#delete-conf"></i>
+            </td>
+        </tr>
+        <tr>
+            <td class="">
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" value="" id="p2" />
+                    <label for="p2" class=" form-check-label">Chicken Sandwich</label>
+                </div>
+            </td>
+            <td class="text-center">pcs</td>
+            <td class="text-center">200</td>
+            <td class="text-center">2</td>
+            <td class="text-center">
+                <i class="fa fa-pencil m-1" aria-hidden="true"></i><i class="fa fa-trash" aria-hidden="true"
+                    data-bs-toggle="modal" data-bs-target="#delete-conf"></i>
+            </td>
+        </tr>
+        <tr>
+            <td class="">
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" value="" id="p2" />
+                    <label for="p2" class=" form-check-label">Chease Sandwich</label>
+                </div>
+            </td>
+            <td class="text-center">pcs</td>
+            <td class="text-center">150</td>
+            <td class="text-center">2</td>
+            <td class="text-center">
+                <i class="fa fa-pencil m-1" aria-hidden="true"></i><i class="fa fa-trash" aria-hidden="true"
+                    data-bs-toggle="modal" data-bs-target="#delete-conf"></i>
+            </td>
+        </tr>
+        <tr>
+            <td class="">
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" value="" id="p2" />
+                    <label for="p2" class=" form-check-label">Normal Sandwich</label>
+                </div>
+            </td>
+            <td class="text-center">pcs</td>
+            <td class="text-center">180</td>
+            <td class="text-center">1</td>
+            <td class="text-center">
+                <i class="fa fa-pencil m-1" aria-hidden="true"></i><i class="fa fa-trash" aria-hidden="true"
+                    data-bs-toggle="modal" data-bs-target="delete-conf"></i>
+            </td>
+        </tr>
+        <tr>
+            <td class="">
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" value="" id="p2" />
+                    <label for="p2" class=" form-check-label">Aaloo Sandwich</label>
+                </div>
+            </td>
+            <td class="text-center">pcs</td>
+            <td class="text-center">190</td>
+            <td class="text-center">1</td>
+            <td class="text-center">
+                <i class="fa fa-pencil m-1" aria-hidden="true"></i><i class="fa fa-trash" aria-hidden="true"
+                    data-bs-toggle="modal" data-bs-target="#delete-conf"></i>
+            </td>
+        </tr>
+    </table>
+
+</div>

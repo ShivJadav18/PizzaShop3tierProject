@@ -47,6 +47,8 @@ builder.Services.AddScoped<IUser,Userop>();
 builder.Services.AddScoped<IUserservice,Userservice>();
 builder.Services.AddScoped<IRoleandPermission,RoleandPermission>();
 builder.Services.AddScoped<IRoleandPermissionServices,RoleandPermissionServices>();
+builder.Services.AddScoped<IMenu,Menu>();
+builder.Services.AddScoped<IMenuService,MenuService>();
 
 var app = builder.Build();
 

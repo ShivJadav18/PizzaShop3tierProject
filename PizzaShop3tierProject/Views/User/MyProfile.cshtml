@@ -112,23 +112,31 @@
                     <form class="col m-2" action="/User/MyProfile" method="post">
                     <input type="hidden" value="@Html.DisplayFor(model => model.Email)" name="Email">
                         <div class="row mb-3">
-                            <div class="form-floating col">
+                            <div class="col">
+                                <div class="form-floating">
                                 <input type="text" class="form-control" name="Firstname" id="firstname" placeholder="First Name" value="@Html.DisplayFor(model => model.Firstname)"/>
                                  <label for="firstname">First Name</label> 
+                                </div>
                             </div>
-                            <div class="form-floating col">
+                            <div class="col">
+                                <div class="form-floating">
                                 <input type="text" class="form-control" name="Lastname" id="lastname" placeholder="Last Name" value="@Html.DisplayFor(model => model.Lastname)"/>
                                 <label for="lastname">Last Name</label> 
+                                </div>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <div class="form-floating col">
+                            <div class="col">
+                                <div class="form-floating">
                                 <input type="text" class="form-control" name="Username" id="username" placeholder="User Name" value="@Html.DisplayFor(model => model.Username)"/>
                                 <label for="username">User Name</label>
+                                </div>
                             </div>
-                            <div class="form-floating col ">
+                            <div class="col">
+                                <div class="form-floating">
                                 <input type="text" class="form-control"name="Contactnumber" id="phone" placeholder="Phone" value="@Html.DisplayFor(model => model.Contactnumber)"/>
                                 <label for="phone">Phone</label> 
+                                </div>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -150,13 +158,17 @@
                               </div>
                         </div>
                         <div class="row mb-5">                          
-                            <div class="form-floating col">
+                            <div class="col">
+                                <div class="form-floating">
                               <textarea class="form-control" placeholder="Leave a comment here" name="Address" id="address">@Html.DisplayFor(model => model.Address)</textarea>
                               <label for="address">Address</label>
+                                </div>
                             </div>
-                            <div class="form-floating col-4">
+                            <div class="col-4">
+                                <div class="form-floating">
                                 <input type="text" class="form-control" id="zipcode" name="Zipcode" placeholder="Zipcode" value="@Html.DisplayFor(model => model.Zipcode)"/>
                                  <label for="zipcode">Zipcode</label> 
+                                </div>
                             </div>
                         </div>
                         <div class="row w-100 align-items-center justify-content-end">

@@ -276,6 +276,33 @@ height: 38px;
 #categories a{
   border: 0;
 }
+.common-style{
+  background-color: #ffffff;
+}
+.nav-item{
+  width: 10rem;
+
+}
+.selected-tab{
+  color: #0066a8 !important;
+  border-style: none none solid none !important;
+  border-color: #0066A8 !important;
+  background-color: #ffffff;
+}
+.border-dashed{
+  border: 1px dashed !important;
+}
+.common-checkbox-modal{
+  width: 3.5rem !important;
+  height: 30px;
+  margin-right: 1rem !important;
+}
+#myTab{
+  height: 3rem;
+}
+#Add-existing-group{
+  color: #0066A7 !important;
+}
 .warning-img{
   width: 60px;
   height: 60px;
