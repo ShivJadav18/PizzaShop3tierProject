@@ -59,17 +59,20 @@
                       </div>
                     <div class="d-flex justify-content-end">
                         <div class="dropdown d-flex justify-content-center align-items-center w-25">
-                            <p class="w-50 text-center">Users per page</p>
-                            <select name="userCount"  asp-for="@Model.count" id="userCount" class="form-control">
+                            <p class="w-50 text-center m-2">Users per page</p>
+                            <select name="userCount"  asp-for="@Model.count" id="userCount" class="form-control w-25">
                                 <option value="2" selected>2</option>
                                 <option value="1">1</option>
                                 <option value="15">15</option>
                             </select>
                         </div>
+                        <div class="d-flex align-items-center">
+                        <p class="m-2">Showing 1..5 of 14</p>
                           <div class="paging d-flex justify-content-around align-items-center">
                               <button class="btn" id="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
                               <button class="btn" id="next"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
                           </div>
+                        </div>
                     </div>
                     <script>
                        $(document).ready(() => {                       

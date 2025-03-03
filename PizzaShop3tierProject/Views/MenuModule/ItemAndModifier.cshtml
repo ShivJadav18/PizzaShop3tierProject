@@ -1,3 +1,5 @@
+@model PizzaShop.Repository.ViewModels.ItemsandCategories
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <div class="content w-100 ml-2 p-2 mr-0" id="content">
@@ -15,7 +17,7 @@
     </ul>
     <div class="tab-content h-75 m-3">
         <div class="main-content tab-pane active row d-flex p-2 " id="home">
-            @await Html.PartialAsync("_ItemPartialView")
+            @await Html.PartialAsync("_ItemPartialView",Model)
 
         </div>
 

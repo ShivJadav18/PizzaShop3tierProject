@@ -66,11 +66,6 @@ public class Authenticate : IAuthenticate{
         return true;
     }
 
-    // public string GetValueFromToken(string token, string claimType){
-    //     string claimValue = GetClaimValueHelper(token,claimType);
-
-    //     return claimValue;
-    // }
 
     private async void EmailSendingHelper(string email,string baseUrl){
          // making of mail
@@ -108,7 +103,7 @@ public class Authenticate : IAuthenticate{
             var token = new JwtSecurityToken(
                 issuer: "Pizzashop App",
                 audience: "dotnetclient",
-                expires: DateTime.Now.AddHours(3),
+                expires: DateTime.Now.AddDays(1),
                 signingCredentials: credentials,
                 claims: claims
                 );

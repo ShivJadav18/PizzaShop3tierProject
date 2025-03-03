@@ -18,13 +18,13 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <div class="form-floating">
-                                <input type="text" class="form-control" id="Firstname" placeholder="First Name" name="Firstname">
+                                <input type="text" class="form-control" id="Firstname" placeholder="First Name" name="Firstname" required>
                                 <label for="Firstname">First Name</label>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-floating">
-                                <input type="text" class="form-control" id="Lastname" placeholder="Last Name" name="Lastname"/>
+                                <input type="text" class="form-control" id="Lastname" placeholder="Last Name" name="Lastname" required/>
                                 <label for="Lastname">Last Name</label>
                                 </div>
                             </div>
@@ -32,12 +32,12 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <div class="form-floating">
-                                <input type="email" class="form-control" id="Email" placeholder="name@example.com" name="Email">
+                                <input type="email" class="form-control" id="Email" placeholder="name@example.com" name="Email" required>
                                 <label for="Email">Email</label>
                                 </div>
                             </div>
                             <div class="dropdown col h-100">
-                                <select class="form-select" aria-label="Default select example" name="RoleId">                       
+                                <select class="form-select" aria-label="Default select example" name="RoleId" required>                       
                                     <option value="1">Super Admin</option>
                                     <option value="2">Account Manager</option>
                                     <option value="3">Chef</option>
@@ -47,13 +47,13 @@
                         <div class="row mb-3">
                             <div class="mb-3 col">
                                 <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInput" placeholder="User Name" name="Username">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="User Name" name="Username" required>
                                 <label for="floatingInput">User Name</label>
                                 </div>
                             </div>
                             <div class="mb-3 col">
                                 <div class="form-floating">
-                                <input type="password" class="form-control" id="floatingInput" placeholder="Password" name="Password">
+                                <input type="password" class="form-control" id="floatingInput" placeholder="Password" name="Password" required>
                                 <label for="floatingInput">Password</label>
                                 </div>
                             </div>
@@ -65,38 +65,38 @@
                             </div>
                             <p class="upload-t">upload</p>
                             </div>
-                            <input type="file" class="form-control w-100 h-100 p-0 " id="upload-in" name="Imageurl"/>
+                            <input type="file" class="form-control w-100 h-100 p-0 " id="upload-in" name="Imageurl" required/>
                         </div>
                         <div class="row mb-3">
                             <div class="dropdown col">
-                                 <select class="form-select"class="h-100" id="CountrySelect" aria-label="Default select example" name="Country">                                                                  
+                                 <select class="form-select"class="h-100" id="CountrySelect" aria-label="Default select example" name="Country" required>                                                                  
                                 </select>
                               </div>
                               <div class="dropdown col">
-                                 <select class="form-select" id="stateSelect" class="h-100" aria-label="Default select example" name="State">                                                                   
+                                 <select class="form-select" id="stateSelect" class="h-100" aria-label="Default select example" name="State" required>                                                                   
                                 </select>
                               </div>
                               <div class="dropdown col">
-                                 <select class="form-select"class="h-100" id="citySelect" aria-label="Default select example" name="City">                                  
+                                 <select class="form-select"class="h-100" id="citySelect" aria-label="Default select example" name="City" required>                                  
                                 </select>
                               </div>
                         </div>
                         <div class="row mb-5">
                             <div class="col">
                                 <div class="form-floating">
-                                <input type="text" class="form-control" placeholder="Zipcode" name="Zipcode"/>
+                                <input type="text" class="form-control" placeholder="Zipcode" name="Zipcode" required/>
                                 <label for="floatingInput1">Zipcode</label>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-floating">
-                                <input type="text" class="form-control" placeholder="Address" name="Address"/>
+                                <input type="text" class="form-control" placeholder="Address" name="Address" required/>
                                 <label for="floatingInput1">Address</label>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-floating">
-                                <input type="text" class="form-control" placeholder="Phone" name="Contactnumber"/>
+                                <input type="text" class="form-control" placeholder="Phone" name="Contactnumber" required/>
                                 <label for="floatingInput1">Phone</label>
                                 </div>
                             </div>
