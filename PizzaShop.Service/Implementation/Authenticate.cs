@@ -53,11 +53,16 @@ public class Authenticate : IAuthenticate{
         return true;
     }
 
-    public bool ResetPassService(string email,string password){
+    public bool ResetPassService(string email,string password,string Currentpass = ""){
 
         Userlogin usertempobj = new Userlogin{Email = email,Password = BCrypt.Net.BCrypt.HashPassword(password)}; 
+        User user = _repouser.GetUser(usertempobj);
 
-        User userobj = _repouser.SetPass(usertempobj);
+        if(!BCrypt.Net.BCrypt.Verify(Currentpass,user.Password)){
+            return false;
+        }
+
+        User userobj = _repouser.SetPass(usertempobj,Currentpass);
 
         if(userobj.Email == null){
             return false;

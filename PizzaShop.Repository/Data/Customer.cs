@@ -27,5 +27,7 @@ public partial class Customer
 
     public virtual User CreatedbyNavigation { get; set; } = null!;
 
+    public virtual ICollection<Order> Orders { get; } = new List<Order>();
+
     public virtual User UpdatedbyNavigation { get; set; } = null!;
 }

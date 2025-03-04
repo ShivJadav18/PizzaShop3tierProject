@@ -31,4 +31,9 @@ public class Menu : IMenu{
        category.Isdeleted = true;
         _context.SaveChanges();
     }
+
+    public List<Item> GetItems(int categoryid){
+        var items = _context.Items.Where(i => i.Isdeleted == false && i.CategoryId == categoryid).OrderBy(i => i.ItemId).Take(5).ToList();
+        return items;
+    }
 }

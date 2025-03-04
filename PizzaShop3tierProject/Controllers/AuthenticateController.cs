@@ -73,11 +73,13 @@ public class AuthenticateController : Controller
         bool result = _userauth.SendEmailForResetpass(email, baseUrl);
         if (result)
         {
+            TempData["success"] = "Email For Reset Password is send.";
             return Json(new { success = true });
         }
         else
         {
-            return Json(new { success = true, message = "Please Enter Right Email!" });
+            TempData["error"] = "Entered Email is not correct.";
+            return Json(new { success = false, message = "Please Enter Right Email!" });
         }
     }
 
@@ -99,10 +101,12 @@ public class AuthenticateController : Controller
 
         if (result)
         {
+            TempData["success"] = "User's Password is successfully changed.";
             return Json(new { success = true, message = "User's Password is successfully changed." });
         }
         else
         {
+            TempData["error"] = "User's Password is Not Changed!";
             return Json(new { success = false, message = "User's Password is Not Changed!" });
         }
 

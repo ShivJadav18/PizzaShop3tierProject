@@ -122,7 +122,9 @@ body, html{
   filter: blur(8px);
   -webkit-filter: blur(8px);
 }
-
+.validation-msg{
+  color: rgba(250, 64, 64, 0.692);
+}
 /* @media screen and (max-width:990px) {
   #menu{
       opacity: 1;

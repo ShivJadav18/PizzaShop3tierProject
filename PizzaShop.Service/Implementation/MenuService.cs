@@ -19,6 +19,11 @@ public class MenuService : IMenuService{
 
     }
 
+    public List<Item> GetItemsService(int categoryid){
+        var items = _menu.GetItems(categoryid);
+        return items;
+    }
+
     public List<Category> GetCategoriesService(){
         var categories = _menu.GetCategories();
         var ItemsandCategories = new ItemsandCategories{
@@ -26,7 +31,23 @@ public class MenuService : IMenuService{
         };
         return categories;
     }
+    public ItemsandCategories GetItemsandCategoriesService(int categoryid){
+        var items = GetItemsService(categoryid);
+        var categories = GetCategoriesService();
+        var totalitems = items.Count;
+        Items itemmodel = new Items{
+            items = items,
+            totalitems = totalitems,
+            count = 5
+        };
+        ItemsandCategories ItemsandCategories = new ItemsandCategories{
+            categories = categories,
+            itemmodel = itemmodel
+        };
 
+        return ItemsandCategories;
+
+    }
     public Category GetCategoryById(int categoryid){
         var categories = _menu.GetCategories();
 

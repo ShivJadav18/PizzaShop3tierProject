@@ -59,6 +59,10 @@ public partial class User
 
     public virtual ICollection<User> InverseUpdatedbyNavigation { get; } = new List<User>();
 
+    public virtual ICollection<Item> ItemCreatedbyNavigations { get; } = new List<Item>();
+
+    public virtual ICollection<Item> ItemUpdatedbyNavigations { get; } = new List<Item>();
+
     public virtual ICollection<Modifier> ModifierCreatedbyNavigations { get; } = new List<Modifier>();
 
     public virtual ICollection<Modifier> ModifierUpdatedbyNavigations { get; } = new List<Modifier>();
@@ -67,6 +71,10 @@ public partial class User
 
     public virtual ICollection<Modifiergroup> ModifiergroupUpdatedbyNavigations { get; } = new List<Modifiergroup>();
 
+    public virtual ICollection<Order> OrderCreatedbyNavigations { get; } = new List<Order>();
+
+    public virtual ICollection<Order> OrderUpdatedbyNavigations { get; } = new List<Order>();
+
     public virtual ICollection<Permission> PermissionCreatedbyNavigations { get; } = new List<Permission>();
 
     public virtual ICollection<Permission> PermissionUpdatedbyNavigations { get; } = new List<Permission>();
@@ -74,6 +82,12 @@ public partial class User
     public virtual ICollection<Permissionfield> PermissionfieldCreatedbyNavigations { get; } = new List<Permissionfield>();
 
     public virtual ICollection<Permissionfield> PermissionfieldUpdatedbyNavigations { get; } = new List<Permissionfield>();
+
+    public virtual ICollection<Rating> RatingCreatedbyNavigations { get; } = new List<Rating>();
+
+    public virtual ICollection<Rating> RatingUpdatedbyNavigations { get; } = new List<Rating>();
+
+    public virtual ICollection<Resettoken> Resettokens { get; } = new List<Resettoken>();
 
     public virtual Role Role { get; set; } = null!;
 
@@ -84,6 +98,14 @@ public partial class User
     public virtual ICollection<Table> TableCreatedbyNavigations { get; } = new List<Table>();
 
     public virtual ICollection<Table> TableUpdatedbyNavigations { get; } = new List<Table>();
+
+    public virtual ICollection<Tax> TaxCreatedbyNavigations { get; } = new List<Tax>();
+
+    public virtual ICollection<Tax> TaxUpdatedbyNavigations { get; } = new List<Tax>();
+
+    public virtual ICollection<Unit> UnitCreatedbyNavigations { get; } = new List<Unit>();
+
+    public virtual ICollection<Unit> UnitUpdatedbyNavigations { get; } = new List<Unit>();
 
     public virtual User? UpdatedbyNavigation { get; set; }
 

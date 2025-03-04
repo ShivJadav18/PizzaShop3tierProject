@@ -27,7 +27,8 @@ public class Userop : IUser{
         return userobj;
     }
 
-    public void EditUser(Usertemp user){
+    public bool EditUser(Usertemp user){
+        try{
         User userreal = _context.Users.FirstOrDefault(u => u.UserId == user.UserId);
 
                 userreal.Email = user.Email;
@@ -43,8 +44,14 @@ public class Userop : IUser{
                 userreal.Zipcode = user.Zipcode;
                 userreal.RoleId = user.RoleId;
                 userreal.Imageurl = user.Imageurl;
+                userreal.Updatedat = user.Updatedat;
+                userreal.Updatedby = user.Updatedby;
 
                 _context.SaveChanges();
+                return true;
+        }catch(Exception e){
+            return false;
+        }
     }
 
     public void DeleteUser(int id){
@@ -55,13 +62,13 @@ public class Userop : IUser{
       _context.SaveChanges();
     }
 
-    public User SetPass(Userlogin user){
+    public User SetPass(Userlogin user,string Currentpass){
          User userobj = _context.Users.Include(u => u.Role).FirstOrDefault(u => u.Email == user.Email);
 
          if(userobj == null){
             return new User{};
         }
-
+        
         userobj.Password = user.Password;
 
         _context.SaveChanges();
@@ -69,9 +76,14 @@ public class Userop : IUser{
         return userobj;
     }
 
-    public User UpdateUser(User usertemp){
-
+    public User UpdateUser(ProfileViewModel usertemp){
+        try{
         var user = _context.Users.Include(u => u.Role).FirstOrDefault(u => u.Email == usertemp.Email);
+        var temp = _context.Users.FirstOrDefault(u => u.Username == usertemp.Username);
+
+        if(temp != null){
+            return new User{Username = "repeated"};
+        }
 
         user.Firstname = usertemp.Firstname;
         user.Lastname = usertemp.Lastname;
@@ -82,12 +94,16 @@ public class Userop : IUser{
         user.City = usertemp.City;
         user.State = usertemp.State;
         user.Contactnumber = usertemp.Contactnumber;
-
+        user.Updatedby = usertemp.Updatedby;
+        user.Updatedat = usertemp.Updatedat;
         
 
         _context.SaveChanges();
 
         return user;
+        }catch(Exception e){
+            return new User{};
+        }
 
     }
 
@@ -95,9 +111,14 @@ public class Userop : IUser{
         return  _context.Users.Include(u => u.Role).Where(u => (string.IsNullOrEmpty(searchval) || u.Username.Contains(searchval)) && u.Isdeleted == false);
     }
 
-    public void AddUser(User userobj){
+    public bool AddUser(User userobj){
+        try{
         _context.Add(userobj);
         _context.SaveChanges();
+        return true;
+        }catch(Exception e){
+            return false;
+        }
     }
 
 }

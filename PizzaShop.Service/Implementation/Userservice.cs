@@ -16,15 +16,30 @@ public class Userservice : IUserservice{
         _repouser = repouser;
     }
 
-    public User GetProfileService(string email){
+    public ProfileViewModel GetProfileService(string email){
         var usertemp = new Userlogin{Email = email};
         User userobj = _repouser.GetUser(usertemp);
 
+        ProfileViewModel user = new ProfileViewModel{
+            Email =userobj.Email,
+            Rolename = userobj.Role.Name,
+            Firstname = userobj.Firstname,
+            Lastname = userobj.Lastname,
+            Username = userobj.Username,
+            Address = userobj.Address,
+            City = userobj.City,
+            State = userobj.State,
+            Country = userobj.Country,
+            Imageurl = userobj.Imageurl,
+            Zipcode = userobj.Zipcode,
+            Contactnumber = userobj.Contactnumber
+        };
+
         if(userobj.Email == null){
-        return new User{};
+        return new ProfileViewModel{};
         }
 
-        return userobj;
+        return user;
     }
 
     public Usertemp GetUsertemp(int id){
@@ -50,8 +65,14 @@ public class Userservice : IUserservice{
         return usertemp;
     }
 
-    public void EditUserService(Usertemp usertemp){
-        _repouser.EditUser(usertemp);
+    public bool EditUserService(Usertemp usertemp){
+        usertemp.Updatedat = DateTime.Now;
+        bool result =_repouser.EditUser(usertemp);
+        if(result){
+            return true;
+        }
+
+        return false;
     }
 
     public Userlistmodel GetUsersListService( Userlistmodel userslistobj){
@@ -73,24 +94,55 @@ public class Userservice : IUserservice{
         _repouser.DeleteUser(id);
     }
 
-    public void AddUserService(User userobj,string email){
+    public bool AddUserService(NewUserModel userobj,string email){
         Userlogin usetemp = new Userlogin{Email = email};
         User addinguser = _repouser.GetUser(usetemp);
         userobj.Password = BCrypt.Net.BCrypt.HashPassword(userobj.Password);
         userobj.Createdby = addinguser.UserId;
         userobj.Updatedby = addinguser.UserId;
 
-        _repouser.AddUser(userobj);
+        User newuser = new User{
+            Firstname = userobj.Firstname,
+            Lastname = userobj.Lastname,
+            Username = userobj.Username,
+            Email = userobj.Email,
+            Contactnumber = userobj.Contactnumber,
+            Address = userobj.Address,
+            Country = userobj.Country,
+            State = userobj.State,
+            City = userobj.City,
+            Zipcode = userobj.Zipcode,
+            Imageurl = userobj.Imageurl,
+            RoleId = userobj.RoleId,
+            Createdby = userobj.Createdby,
+            Updatedby = userobj.Updatedby,
+            Password = userobj.Password
+        };
+
+        bool result =_repouser.AddUser(newuser);
+
+        if(!result){
+            return false;
+        }
+        return true;
     }
 
-    public User UpdateProfileService(User usertemp){
+    public ProfileViewModel UpdateProfileService(ProfileViewModel usertemp){
+        usertemp.Updatedat = DateTime.Now;
+        User updateduser = _repouser.UpdateUser(usertemp);
+        
 
-        User user = _repouser.UpdateUser(usertemp);
-
-        if(user.Email == null){
-        return new User{};
+        if(updateduser.Email == null && updateduser.Username == "repeated"){
+            usertemp.Username = "repeated";
+            return usertemp;
         }
 
-        return user;
+        if(updateduser.Email == null){
+        return new ProfileViewModel{};
+        }
+    
+        usertemp.Rolename = updateduser.Role.Name;
+
+        return usertemp;
     }
 }

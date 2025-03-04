@@ -1,4 +1,4 @@
-@model PizzaShop.Repository.Data.User;
+@model PizzaShop.Repository.ViewModels.ProfileViewModel;
 
 
 @{
@@ -8,86 +8,6 @@
 
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
-@* <div class="content w-100 m-2 p-2" id="content">
-                <div class="first-part d-flex justify-content-between">
-                    <h2>Users</h2>
-                    <form class="d-flex">
-                        <div class="form-group m-1">
-                            <input type="text" class="form-control" placeholder="Search"/>
-                        </div>
-                        <a href="./adduser.html" class="btn btn-nonprimary m-1 imp">
-                            Add User
-                        </a>
-                        <!-- <button class="btn btn-nonprimary m-1" id="adduser">Add User</button> -->
-                    </form>
-                </div>
-                <div class="tbl m-2 d-flex flex-column ">
-                    <table class="table" id="tbl">
-                        <thead>
-                            <th> @Html.DisplayNameFor(model => model.Firstname)</th>
-                            <th>@Html.DisplayNameFor(model => model.Email)</th>
-                            <th> @Html.DisplayNameFor(model => model.Contactnumber)</th>
-                            <th> @Html.DisplayNameFor(model => model.Role)</th>
-                            <th> @Html.DisplayNameFor(model => model.Status)</th>
-                            <th>Action</th>
-                        </thead>
-                
-                        <tr>
-                            <td> @Html.DisplayFor(model => model.Username)</td>
-                            <td> @Html.DisplayFor(model => model.Email)</td>
-                            <td> @Html.DisplayFor(model => model.Contactnumber)</td>
-                            <td> @Html.DisplayFor(model => model.Role.RoleId)</td>
-                            <td>
-                                <span class="badge rounded-pill bg-success w-50">Active</span>
-                            </td>
-                            <td>
-                                <a href="./Edituser.html">
-                                    <i class="fa fa-pencil mr-2" aria-hidden="true"></i>
-                                </a>
-                                <i class="fa fa-trash" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#staticBackdrop"  data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
-                            </td>
-                        </tr>
-                        
-                    </table>
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="staticBackdropLabel">Delete Confirmation</h5>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body text-center">
-                              <img src="./images/toppng.com-warning-icon-2400x2400.png" alt="warning" class="warning-img">
-                              <p>Are you sure you want to delete this user?</p>
-                            </div>
-                            <div class="modal-footer d-flex justify-content-center">
-                              <button type="button" class="btn btn-nonsecondary imp" data-bs-dismiss="modal">Yes</button>
-                              <button type="button" class="btn btn-nonprimary no-imp">No</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    <div class="d-flex justify-content-end">
-                        <div class="dropdown d-flex justify-content-center align-items-center w-25">
-                            <p class="w-50 text-center">Users per page</p>
-                            <button class="w-25 btn btn-nonsecondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              1
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                              <a class="dropdown-item" href="#">Action</a>
-                              <a class="dropdown-item" href="#">Another action</a>
-                              <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                          </div>
-                          <div class="paging d-flex justify-content-around align-items-center">
-                              <button class="btn"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
-                            <button class="btn"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
-                          </div>
-                    </div>
-                    <script src="./temp.js"></script>
-                </div>
-
-            </div> *@
 
             <div class="content w-100" id="content">
                 <div class="first-part d-flex justify-content-between">
@@ -104,7 +24,7 @@
                     <input type="file" class="d-none" id="image-input"/>
                       <div class="align-items-center ">
                         <h4>@Html.DisplayFor(model => model.Username)</h4>
-                        <p id="role">@Html.DisplayFor(model => model.Role.Name)</p>
+                        <p id="role">@Html.DisplayFor(model => model.Rolename)</p>
                       </div>
                     </div>
                     <p>@Html.DisplayFor(model => model.Email)</p>
@@ -117,12 +37,14 @@
                                 <input type="text" class="form-control" name="Firstname" id="firstname" placeholder="First Name" value="@Html.DisplayFor(model => model.Firstname)"/>
                                  <label for="firstname">First Name</label> 
                                 </div>
+                                <p class="validation-msg">@Html.ValidationMessageFor(model => model.Firstname)</p>
                             </div>
                             <div class="col">
                                 <div class="form-floating">
                                 <input type="text" class="form-control" name="Lastname" id="lastname" placeholder="Last Name" value="@Html.DisplayFor(model => model.Lastname)"/>
                                 <label for="lastname">Last Name</label> 
                                 </div>
+                                <p class="validation-msg">@Html.ValidationMessageFor(model => model.Lastname)</p>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -131,12 +53,14 @@
                                 <input type="text" class="form-control" name="Username" id="username" placeholder="User Name" value="@Html.DisplayFor(model => model.Username)"/>
                                 <label for="username">User Name</label>
                                 </div>
+                                <p class="validation-msg">@Html.ValidationMessageFor(model => model.Username)</p>
                             </div>
                             <div class="col">
                                 <div class="form-floating">
                                 <input type="text" class="form-control"name="Contactnumber" id="phone" placeholder="Phone" value="@Html.DisplayFor(model => model.Contactnumber)"/>
                                 <label for="phone">Phone</label> 
                                 </div>
+                                <p class="validation-msg">@Html.ValidationMessageFor(model => model.Contactnumber)</p>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -145,16 +69,19 @@
                                  <select class="form-select"class="h-100" id="CountrySelect" asp-for="Country" aria-label="Default select example" name="Country">    
                                     <option value="@Model.Country" selected>@Model.Country</option>                                                              
                                 </select>
+                                <p class="validation-msg">@Html.ValidationMessageFor(model => model.Country)</p>
                               </div>
                               <div class="dropdown col">
                                  <select class="form-select" id="stateSelect" class="h-100" asp-for="State" aria-label="Default select example" name="State">       
                                     <option value="@Model.State" selected>@Model.State</option>                                                             
                                 </select>
+                                <p class="validation-msg">@Html.ValidationMessageFor(model => model.State)</p>
                               </div>
                               <div class="dropdown col">
                                  <select class="form-select"class="h-100" id="citySelect" asp-for="City" aria-label="Default select example" name="City">      
                                     <option value="@Model.City" selected>@Model.City</option>                             
                                 </select>
+                                <p class="validation-msg">@Html.ValidationMessageFor(model => model.City)</p>
                               </div>
                         </div>
                         <div class="row mb-5">                          
@@ -163,12 +90,14 @@
                               <textarea class="form-control" placeholder="Leave a comment here" name="Address" id="address">@Html.DisplayFor(model => model.Address)</textarea>
                               <label for="address">Address</label>
                                 </div>
+                                <p class="validation-msg">@Html.ValidationMessageFor(model => model.Address)</p>
                             </div>
                             <div class="col-4">
                                 <div class="form-floating">
                                 <input type="text" class="form-control" id="zipcode" name="Zipcode" placeholder="Zipcode" value="@Html.DisplayFor(model => model.Zipcode)"/>
                                  <label for="zipcode">Zipcode</label> 
                                 </div>
+                                <p class="validation-msg">@Html.ValidationMessageFor(model => model.Zipcode)</p>
                             </div>
                         </div>
                         <div class="row w-100 align-items-center justify-content-end">
@@ -237,11 +166,11 @@
                     headers: { "X-CSCAPI-KEY": apiKey },
                     success: function (states) {
                         let stateSelect = $("#stateSelect");
-                        stateSelect.empty().append('<option selected>Select State</option>');
+                        stateSelect.empty().append('<option selected></option>');
                         $.each(states, function (index, state) {
                             stateSelect.append(`<option value="${state.name}" data-code="${state.iso2}">${state.name}</option>`);
                         });
-                        $("#citySelect").empty().append('<option selected>Select City</option>');
+                        $("#citySelect").empty().append('<option selected></option>');
                     },
                     error: function () {
                         alert("Error fetching states.");
@@ -264,7 +193,7 @@
                     headers: { "X-CSCAPI-KEY": apiKey },
                     success: function (cities) {
                         let citySelect = $("#citySelect");
-                        citySelect.empty().append('<option selected>Select City</option>');
+                        citySelect.empty().append('<option selected></option>');
                         $.each(cities, function (index, city) {
                             citySelect.append(`<option value="${city.name}">${city.name}</option>`);
                         });
@@ -280,7 +209,10 @@
             $("#selectedCity").val($(this).val());
         });
                
-
+        canclebtn.click((e) => {
+            e.preventDefault()
+            window.location = "/Dashboard/Dashboardpage"
+        })
               })
             </script>
 

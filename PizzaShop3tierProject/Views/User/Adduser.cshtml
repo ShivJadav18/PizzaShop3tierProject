@@ -1,4 +1,4 @@
-@model PizzaShop.Repository.Data.User
+@model PizzaShop.Repository.ViewModels.NewUserModel
 
 @{
     ViewData["Title"] = "Create";
@@ -18,23 +18,26 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <div class="form-floating">
-                                <input type="text" class="form-control" id="Firstname" placeholder="First Name" name="Firstname" required>
+                                <input type="text" class="form-control" asp-for="Firstname" id="Firstname" placeholder="First Name" name="Firstname" required>
                                 <label for="Firstname">First Name</label>
                                 </div>
+                                <p class="validation-msg">@Html.ValidationMessageFor(Model => Model.Firstname)</p>
                             </div>
                             <div class="col">
                                 <div class="form-floating">
-                                <input type="text" class="form-control" id="Lastname" placeholder="Last Name" name="Lastname" required/>
+                                <input type="text" class="form-control" id="Lastname" asp-for="Lastname" placeholder="Last Name" name="Lastname" required/>
                                 <label for="Lastname">Last Name</label>
                                 </div>
+                                <p class="validation-msg">@Html.ValidationMessageFor(Model => Model.Lastname)</p>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col">
                                 <div class="form-floating">
-                                <input type="email" class="form-control" id="Email" placeholder="name@example.com" name="Email" required>
+                                <input type="email" class="form-control" id="Email" asp-for="Email" placeholder="name@example.com" name="Email" required>
                                 <label for="Email">Email</label>
                                 </div>
+                                <p class="validation-msg">@Html.ValidationMessageFor(Model => Model.Email)</p>
                             </div>
                             <div class="dropdown col h-100">
                                 <select class="form-select" aria-label="Default select example" name="RoleId" required>                       
@@ -47,15 +50,17 @@
                         <div class="row mb-3">
                             <div class="mb-3 col">
                                 <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInput" placeholder="User Name" name="Username" required>
+                                <input type="text" class="form-control" id="floatingInput" asp-for="Username" placeholder="User Name" name="Username" required>
                                 <label for="floatingInput">User Name</label>
                                 </div>
+                            <p class="validation-msg">@Html.ValidationMessageFor(Model => Model.Username)</p>
                             </div>
                             <div class="mb-3 col">
                                 <div class="form-floating">
-                                <input type="password" class="form-control" id="floatingInput" placeholder="Password" name="Password" required>
+                                <input type="password" class="form-control" id="floatingInput" asp-for="Password" placeholder="Password" name="Password" required>
                                 <label for="floatingInput">Password</label>
                                 </div>
+                                <p class="validation-msg">@Html.ValidationMessageFor(Model => Model.Password)</p>
                             </div>
                         </div>
                         <div class="w-100 mb-3 d-flex flex-column " id="upload">
@@ -65,40 +70,46 @@
                             </div>
                             <p class="upload-t">upload</p>
                             </div>
-                            <input type="file" class="form-control w-100 h-100 p-0 " id="upload-in" name="Imageurl" required/>
+                            <input type="file" class="form-control w-100 h-100 p-0 " id="upload-in" asp-for="Imageurl" name="Imageurl" required/>
                         </div>
                         <div class="row mb-3">
                             <div class="dropdown col">
-                                 <select class="form-select"class="h-100" id="CountrySelect" aria-label="Default select example" name="Country" required>                                                                  
+                                 <select class="form-select"class="h-100" id="CountrySelect" asp-for="Country" aria-label="Default select example" name="Country" required>                                                                  
                                 </select>
+                                <p class="validation-msg">@Html.ValidationMessageFor(Model => Model.Country)</p>
                               </div>
                               <div class="dropdown col">
-                                 <select class="form-select" id="stateSelect" class="h-100" aria-label="Default select example" name="State" required>                                                                   
+                                 <select class="form-select" id="stateSelect" class="h-100" asp-for="State" aria-label="Default select example" name="State" required>                                                                   
                                 </select>
+                                <p class="validation-msg">@Html.ValidationMessageFor(Model => Model.State)</p>
                               </div>
                               <div class="dropdown col">
-                                 <select class="form-select"class="h-100" id="citySelect" aria-label="Default select example" name="City" required>                                  
+                                 <select class="form-select"class="h-100" id="citySelect" asp-for="City" aria-label="Default select example" name="City" required>                                  
                                 </select>
+                                <p class="validation-msg">@Html.ValidationMessageFor(Model => Model.City)</p>
                               </div>
                         </div>
                         <div class="row mb-5">
                             <div class="col">
                                 <div class="form-floating">
-                                <input type="text" class="form-control" placeholder="Zipcode" name="Zipcode" required/>
+                                <input type="text" class="form-control" placeholder="Zipcode" asp-for="Zipcode" name="Zipcode" required/>
                                 <label for="floatingInput1">Zipcode</label>
                                 </div>
+                                <p class="validation-msg">@Html.ValidationMessageFor(Model => Model.Zipcode)</p>
                             </div>
                             <div class="col">
                                 <div class="form-floating">
-                                <input type="text" class="form-control" placeholder="Address" name="Address" required/>
+                                <input type="text" class="form-control" placeholder="Address" asp-for="Address" name="Address" required/>
                                 <label for="floatingInput1">Address</label>
                                 </div>
+                                <p class="validation-msg">@Html.ValidationMessageFor(Model => Model.Address)</p>
                             </div>
                             <div class="col">
                                 <div class="form-floating">
-                                <input type="text" class="form-control" placeholder="Phone" name="Contactnumber" required/>
+                                <input type="text" class="form-control" placeholder="Phone" asp-for="Contactnumber" name="Contactnumber" required/>
                                 <label for="floatingInput1">Phone</label>
                                 </div>
+                                <p class="validation-msg">@Html.ValidationMessageFor(Model => Model.Contactnumber)</p>
                             </div>
                         </div>
                         <div class="row w-100 align-items-center">

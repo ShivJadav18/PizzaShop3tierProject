@@ -10,7 +10,7 @@ public interface IAuthenticate{
 
     public  bool SendEmailForResetpass(string email,string baseUrl);
 
-    public bool ResetPassService(string email,string password);
+    public bool ResetPassService(string email,string password,string Currentpass="");
 
     // public string GetValueFromToken(string token, string claimType);
 }

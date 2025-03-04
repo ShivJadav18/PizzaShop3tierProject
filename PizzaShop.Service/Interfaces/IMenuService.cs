@@ -1,4 +1,5 @@
 using PizzaShop.Repository.Data;
+using PizzaShop.Repository.ViewModels;
 
 namespace PizzaShop.Service.Interfaces;
 
@@ -14,4 +15,8 @@ public interface IMenuService{
     public void EditCategoryService(int id,string name,string description);
 
     public void DeleteCategoryService(int id);
+
+    public List<Item> GetItemsService(int categoryid);
+
+    public ItemsandCategories GetItemsandCategoriesService(int categoryid);
 }

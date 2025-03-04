@@ -16,18 +16,21 @@
                 <div class="add-user-form  m-2 p-2">
                     <form class="w-100 col" asp-action="Edit" asp-controller="User" asp-route-id="@Model.UserId"  method="post">
                         <input type="hidden" asp-for="UserId" name="UserId"/>
+                        <input type="hidden" value="@Model.Email" name="Email">
                         <div class="row mb-3">
                             <div class="col">
                                 <div class="form-floating">
                                 <input type="text" asp-for="Firstname" class="form-control" id="floatingInput" placeholder="First Name" name="Firstname">
                                 <label for="floatingInput">First Name</label>
                                 </div>
+                                <p class="validation-msg">@Html.ValidationMessageFor(model => model.Firstname)</p>
                             </div>
                             <div class="col">
                                 <div class="form-floating">
                                 <input type="text" asp-for="Lastname" class="form-control" placeholder="Last Name" name="Lastname"/>
                                 <label for="floatingInput1">Last Name</label>
                                 </div>
+                                <p class="validation-msg">@Html.ValidationMessageFor(model => model.Lastname)</p>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -36,6 +39,7 @@
                                 <input type="email" class="form-control" asp-for="Email" id="floatingInput" placeholder="name@example.com" name="Email" disabled>
                                 <label for="floatingInput">Email</label>
                                 </div>
+                                <p class="validation-msg">@Html.ValidationMessageFor(model => model.Email)</p>
                             </div>
                             <div class="dropdown col h-100">
                                 <select class="form-select"class="h-100" asp-for="RoleId" aria-label="Default select example" name="RoleId">                       
@@ -51,6 +55,7 @@
                                 <input type="text" class="form-control" id="floatingInput" asp-for="Username" placeholder="User Name" name="Username">
                                 <label for="floatingInput">User Name</label>
                                 </div>
+                                <p class="validation-msg">@Html.ValidationMessageFor(model => model.Username)</p>
                             </div>
                              <div class="dropdown col h-100">
                            <select class="form-select col h-100" asp-for="Status" aria-label="Default select example" name="Status">                       
@@ -63,7 +68,7 @@
                             <div id="cloud-upload">
                                 <i class="fa fa-cloud-upload w-100 h-100" aria-hidden="true"></i>
                             </div>
-                                <p class="upload-t">upload</p>
+                            <p class="upload-t">upload</p>
                             <input type="file" class="form-control w-100 h-100 " id="upload-in" asp-for="Imageurl" value="@Model.Imageurl" name="Imageurl"/>
                         </div>
                         <div class="row mb-3">
@@ -71,16 +76,19 @@
                                  <select class="form-select"class="h-100" id="CountrySelect" asp-for="Country" aria-label="Default select example" name="Country">    
                                     <option value="@Model.Country" selected>@Model.Country</option>                                                              
                                 </select>
+                                <p class="validation-msg">@Html.ValidationMessageFor(model => model.Country)</p>
                               </div>
                               <div class="dropdown col">
                                  <select class="form-select" id="stateSelect" class="h-100" asp-for="State" aria-label="Default select example" name="State">       
                                     <option value="@Model.State" selected>@Model.State</option>                                                             
                                 </select>
+                                <p class="validation-msg">@Html.ValidationMessageFor(model => model.State)</p>
                               </div>
                               <div class="dropdown col">
                                  <select class="form-select"class="h-100" id="citySelect" asp-for="City" aria-label="Default select example" name="City">      
                                     <option value="@Model.City" selected>@Model.City</option>                             
                                 </select>
+                                <p class="validation-msg">@Html.ValidationMessageFor(model => model.City)</p>
                               </div>
                         </div>
                         <div class="row mb-5">
@@ -89,18 +97,21 @@
                                 <input type="text" class="form-control" asp-for="Zipcode" placeholder="Zipcode" name="Zipcode"/>
                                 <label for="floatingInput1">Zipcode</label>
                                 </div>
+                                <p class="validation-msg">@Html.ValidationMessageFor(model => model.Zipcode)</p>
                             </div>
                             <div class="col">
                                 <div class="form-floating">
                                 <input type="text" class="form-control" asp-for="Address" placeholder="Address" name="Address"/>
                                 <label for="floatingInput1">Address</label>
                                 </div>
+                                <p class="validation-msg">@Html.ValidationMessageFor(model => model.Address)</p>
                             </div>
                             <div class="col">
                                 <div class="form-floating">
                                 <input type="text" class="form-control" asp-for="Contactnumber" placeholder="Phone" name="Contactnumber"/>
                                 <label for="floatingInput1">Phone</label>
                                 </div>
+                                <p class="validation-msg">@Html.ValidationMessageFor(model => model.Contactnumber)</p>
                             </div>
                         </div>
                         <div class="row w-100 align-items-center">

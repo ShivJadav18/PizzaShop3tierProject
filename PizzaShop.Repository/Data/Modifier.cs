@@ -31,5 +31,7 @@ public partial class Modifier
 
     public virtual ICollection<Modifiertomodifiergroup> Modifiertomodifiergroups { get; } = new List<Modifiertomodifiergroup>();
 
+    public virtual ICollection<Orderitemmodifier> Orderitemmodifiers { get; } = new List<Orderitemmodifier>();
+
     public virtual User UpdatedbyNavigation { get; set; } = null!;
 }

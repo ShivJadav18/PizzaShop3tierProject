@@ -19,6 +19,8 @@
                     </div>
                     <div class="modal-body">
                         <form action="">
+    using PizzaShop.Repository.ViewModels;
+    using PizzaShop.Repository.Data;
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control" id="Categoryname" placeholder="Category Name">
                                 <label for="Categoryname">Name</label>
@@ -106,279 +108,9 @@
             </div>
         </div>
 </div>
-<div class="items-list-sec col">
-    <div class="header">
-        <h5 class="Category">Items</h5>
-    </div>
-    <form class="d-flex justify-content-end">
-        <div class="input-group w-25 m-2">
-            <input type="text" class="form-control" id="search" placeholder="Search" />
-            <span class="input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span>
-        </div>
-        <div class="btn delete-btn m-2">
-            <i class="fa fa-trash-o" aria-hidden="true"></i>
-        </div>
-        <div class="btn imp m-2" data-bs-target="#AddItem" data-bs-toggle="modal">
-            <i class="fa fa-plus" aria-hidden="true"></i>
-            New Item
-        </div>
-    </form>
-    <div class="modal fade " id="AddItem" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl">
-            <div class="modal-content">
-                <div class="modal-header b-0">
-                    <h5 class="modal-title" id="staticBackdropLabel">Add New Menu Item</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="" class="col">
-                        <div class="col">
-                            <div class="row">
-                                <div class="col mb-3">
-                                    <div class="form-floating">
-                                        <select name="ItemsCategory" id="ItemsCategory" class="form-select"
-                                            placeholder="Select Categories">
-                                            <option value="">Sandwich</option>
-                                            <option value=""></option>
-                                            <option value=""></option>
-                                        </select>
-                                        <label for="ItemsCategory">Categories</label>
-                                    </div>
-                                </div>
-                                <div class="col mb-3">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="ItemName" placeholder="Item Name">
-                                        <label for="ItemName">Name*</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col mb-3">
-                                    <div class="form-floating">
-                                        <select name="ItemType" id="ItemType" class="form-select"
-                                            placeholder="Select Type">
-                                            <option value="">select item type</option>
-                                            <option value=""></option>
-                                            <option value=""></option>
-                                        </select>
-                                        <label for="ItemType">Item Type</label>
-                                    </div>
-                                </div>
-                                <div class="col mb-3">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="Rate" placeholder="Category Name"
-                                            value="0">
-                                        <label for="Rate">Rate*</label>
-                                    </div>
-                                </div>
-                                <div class="col mb-3">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="Quantity"
-                                            placeholder="Category Name" value="0">
-                                        <label for="Quantity">Quantity*</label>
-                                    </div>
-                                </div>
-                                <div class="col mb-3">
-                                    <div class="form-floating">
-                                        <select name="ItemType" id="Unit" class="form-select" placeholder="Select Unit">
-                                            <option value="">Select Unit</option>
-                                            <option value=""></option>
-                                            <option value=""></option>
-                                        </select>
-                                        <label for="Unit">Unit</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div
-                                    class="form-check form-switch p-0 d-flex align-items-center justify-content-center col">
-                                    <input class="form-check-input toggle-checkbox common-checkbox-modal m-1"
-                                        type="checkbox" role="switch" />
-                                    <p class="m-0">Available</p>
-                                </div>
-
-                                <div
-                                    class="form-check form-switch p-0 d-flex align-items-center justify-content-center col">
-                                    <input class="form-check-input toggle-checkbox m-1 common-checkbox-modal"
-                                        type="checkbox" role="switch" />
-                                    <p class="m-0">DefaultTax</p>
-                                </div>
-                                <div class="col mb-3">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="TaxPercentage"
-                                            placeholder="Category Name">
-                                        <label for="TaxPercentage">Tax Percentage</label>
-                                    </div>
-                                </div>
-                                <div class="col mb-3">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="ShortCode"
-                                            placeholder="Category Name">
-                                        <label for="ShortCode">Short Code</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col mb-3">
-                                    <div class="form-floating">
-                                        <textarea type="text" class="form-control" id="ItemDescription"
-                                            placeholder="Item Description"></textarea>
-                                        <label for="ItemDescription">Description</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <p>Upload Image</p>
-                                <div class="col">
-                                    <div class=" border-dashed rounded-1 text-center mb-3 mb-lg-0">
-                                        <input type="file" name="file" id="file" class="d-none">
-                                        <label for="file" role="button" class="py-5 w-100"><img
-                                                src="./images/icons/upload-files.svg" alt=""> Drag and
-                                            Drop or Browse Files</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div></div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-nonprimary imp">Save</button>
-                    <button type="button" class="btn btn-nonsecondary no-imp" data-bs-dismiss="modal">Cancle</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <table class="table table-borderless">
-        <thead>
-            <th class="">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" value="" id="p1" />
-                    <label for="p1" class="header-per form-check-label">
-                        <h3 class="header-per">Name</h3>
-                    </label>
-                </div>
-            </th>
-            <th class="text-center">ItemType</th>
-            <th class="text-center">Rate</th>
-            <th class="text-center">Quantity</th>
-            <th class="text-center">Available</th>
-            <th class="text-center">Action</th>
-        </thead>
-        <tr>
-            <td class="">
-                <div class="form-check  mb-3">
-                    <input type="checkbox" class="form-check-input" value="" id="p2" />
-                    <img src="~/images/dining-menu.png" alt="">
-                    <label for="p2" class=" form-check-label">Panjabi Tadaka Sandwich</label>
-                </div>
-            </td>
-            <td class="text-center">
-                <img src="~/images/icons/non-veg-icon.svg" class="img-vn" alt="">
-            </td>
-            <td class="text-center">200</td>
-            <td class="text-center">1</td>
-            <td class="form-check form-switch d-flex justify-content-center p-0 mb-3">
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            </td>
-
-            <td class="text-center">
-                <i class="fa fa-pencil m-1" aria-hidden="true"></i><i class="fa fa-trash" aria-hidden="true"
-                    data-bs-toggle="modal" data-bs-target="#delete-conf"></i>
-            </td>
-        </tr>
-        <tr>
-            <td class="">
-                <div class="form-check mb-3">
-                    <input type="checkbox" class="form-check-input" value="" id="p2" />
-                    <img src="~/images/dining-menu.png" alt="">
-                    <label for="p2" class=" form-check-label">Chicken Sandwich</label>
-                </div>
-            </td>
-            <td class="text-center">
-                <img src="~/images/icons/non-veg-icon.svg" class="img-vn" alt="">
-            </td>
-            <td class="text-center">200</td>
-            <td class="text-center">2</td>
-            <td class="form-check form-switch d-flex justify-content-center p-0 mb-3">
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            </td>
-
-            <td class="text-center">
-                <i class="fa fa-pencil m-1" aria-hidden="true"></i><i class="fa fa-trash" aria-hidden="true"
-                    data-bs-toggle="modal" data-bs-target="#delete-conf"></i>
-            </td>
-        </tr>
-        <tr>
-            <td class="">
-                <div class="form-check mb-3">
-                    <input type="checkbox" class="form-check-input" value="" id="p2" />
-                    <img src="~/images/dining-menu.png" alt="">
-                    <label for="p2" class=" form-check-label">Chease Sandwich</label>
-                </div>
-            </td>
-            <td class="text-center">
-                <img src="~/images/icons/veg-icon.svg" class="img-vn" alt="">
-            </td>
-            <td class="text-center">150</td>
-            <td class="text-center">2</td>
-            <td class="form-check form-switch d-flex justify-content-center p-0 mb-3">
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            </td>
-
-            <td class="text-center">
-                <i class="fa fa-pencil m-1" aria-hidden="true"></i><i class="fa fa-trash" aria-hidden="true"
-                    data-bs-toggle="modal" data-bs-target="#delete-conf"></i>
-            </td>
-        </tr>
-        <tr>
-            <td class="">
-                <div class="form-check mb-3">
-                    <input type="checkbox" class="form-check-input" value="" id="p2" />
-                    <img src="~/images/dining-menu.png" alt="">
-                    <label for="p2" class=" form-check-label">Normal Sandwich</label>
-                </div>
-            </td>
-            <td class="text-center">
-                <img src="~/images/icons/veg-icon.svg" class="img-vn" alt="">
-            </td>
-            <td class="text-center">180</td>
-            <td class="text-center">1</td>
-            <td class="form-check form-switch d-flex justify-content-center p-0 mb-3">
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            </td>
-
-            <td class="text-center">
-                <i class="fa fa-pencil m-1" aria-hidden="true"></i><i class="fa fa-trash" aria-hidden="true"
-                    data-bs-toggle="modal" data-bs-target="#delete-conf"></i>
-            </td>
-        </tr>
-        <tr>
-            <td class="">
-                <div class="form-check mb-3">
-                    <input type="checkbox" class="form-check-input" value="" id="p2" />
-                    <img src="~/images/dining-menu.png" alt="">
-                    <label for="p2" class=" form-check-label">Aaloo Sandwich</label>
-                </div>
-            </td>
-            <td class="text-center">
-                <img src="~/images/icons/veg-icon.svg" class="img-vn" alt="">
-            </td>
-            <td class="text-center">190</td>
-            <td class="text-center">1</td>
-            <td class="form-check form-switch d-flex justify-content-center p-0 mb-3">
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            </td>
-            <td class="text-center">
-                <i class="fa fa-pencil m-1" aria-hidden="true"></i><i class="fa fa-trash" aria-hidden="true"
-                    data-bs-toggle="modal" data-bs-target="#delete-conf"></i>
-            </td>
-        </tr>
-    </table>
-
+<div class="items-list-sec col" id="items-list-sec">
+@await Html.PartialAsync("_Items",Model.itemmodel)
 </div>
-
 <script>
     $(document).ready(() => {
 
@@ -475,6 +207,23 @@
                     alert(response.message);
                     window.location.reload();
                 }
+            }
+        })
+    })
+
+    $(".Categories").click(function () {
+       
+        var categoryid = $(this).data("categoryid");
+        alert(categoryid);
+        $.ajax({
+            url : "/MenuModule/ItemsCategoryvise",
+            type : "POST",
+            data : {
+                categoryid : categoryid
+            },
+            success : (data) => {
+                alert();
+                $("#items-list-sec").html(data);
             }
         })
     })

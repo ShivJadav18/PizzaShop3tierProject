@@ -10209,11 +10209,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "d:\\PizzaShop3tierProject\\PizzaShop.Service\\PizzaShop.Service.csproj",
+      "projectUniqueName": "D:\\PizzaShop3tierProject\\PizzaShop.Service\\PizzaShop.Service.csproj",
       "projectName": "PizzaShop.Service",
-      "projectPath": "d:\\PizzaShop3tierProject\\PizzaShop.Service\\PizzaShop.Service.csproj",
+      "projectPath": "D:\\PizzaShop3tierProject\\PizzaShop.Service\\PizzaShop.Service.csproj",
       "packagesPath": "C:\\Users\\pce65\\.nuget\\packages\\",
-      "outputPath": "d:\\PizzaShop3tierProject\\PizzaShop.Service\\obj\\",
+      "outputPath": "D:\\PizzaShop3tierProject\\PizzaShop.Service\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\pce65\\AppData\\Roaming\\NuGet\\NuGet.Config"

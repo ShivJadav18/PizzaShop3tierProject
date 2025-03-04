@@ -10,4 +10,6 @@ public interface IMenu{
      public void UpdateCategory(Category category);
 
      public void RemoveCategory(Category category);
+
+      public List<Item> GetItems(int categoryid);
 }

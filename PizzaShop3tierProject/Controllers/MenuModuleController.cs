@@ -21,8 +21,13 @@ public class MenuModuleController : Controller{
         return View(categoriesanditem);
     }
 
-    [Authorize]
+    [HttpPost]
+    public IActionResult ItemsCategoryvise(int categoryid){
+        var categoriesanditem = GetItemsandCategories(categoryid);
+        return PartialView("_Items",categoriesanditem.itemmodel);
+    }
 
+    [Authorize]
     public IActionResult ForItems(){
         var categoriesanditem = GetItemsandCategories();
         return PartialView("_ItemPartialView",categoriesanditem);
@@ -74,7 +79,7 @@ public class MenuModuleController : Controller{
 
         return Json(new {success = true, message = "Category successfully deleted."});
     }
-    
+
     private string GetClaimValueHelper(string token, string claimType){
         var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -90,11 +95,8 @@ public class MenuModuleController : Controller{
         return categories;
     }
 
-    private ItemsandCategories GetItemsandCategories(){
-        var categories = GetCategories();
-        var ItemsandCategories = new ItemsandCategories{
-            categories = categories
-        };
+    public ItemsandCategories GetItemsandCategories(int categoryid = 2){
+        var ItemsandCategories = _menuservice.GetItemsandCategoriesService(categoryid);
         return ItemsandCategories;
     }
 
