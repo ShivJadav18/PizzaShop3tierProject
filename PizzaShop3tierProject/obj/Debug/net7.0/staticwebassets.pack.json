@@ -5,6 +5,18 @@
       "PackagePath": "staticwebassets\\PizzaShop3tierProject.bundle.scp.css"
     },
     {
+      "Id": "D:\\PizzaShop3tierProject\\PizzaShop3tierProject\\wwwroot\\UploadedImages\\profile_div_bg_227b4c0c-172d-4c2b-974a-97ceec7e30d1.jpg",
+      "PackagePath": "staticwebassets\\UploadedImages\\profile_div_bg_227b4c0c-172d-4c2b-974a-97ceec7e30d1.jpg"
+    },
+    {
+      "Id": "D:\\PizzaShop3tierProject\\PizzaShop3tierProject\\wwwroot\\UploadedImages\\profile_div_bg_b308b4fd-ed70-45c7-8e7f-3aaf4867b7bd.jpg",
+      "PackagePath": "staticwebassets\\UploadedImages\\profile_div_bg_b308b4fd-ed70-45c7-8e7f-3aaf4867b7bd.jpg"
+    },
+    {
+      "Id": "D:\\PizzaShop3tierProject\\PizzaShop3tierProject\\wwwroot\\UploadedImages\\transperent-pizza_7fdddc45-8742-43fe-a9f6-893b10cf3bd6.png",
+      "PackagePath": "staticwebassets\\UploadedImages\\transperent-pizza_7fdddc45-8742-43fe-a9f6-893b10cf3bd6.png"
+    },
+    {
       "Id": "D:\\PizzaShop3tierProject\\PizzaShop3tierProject\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

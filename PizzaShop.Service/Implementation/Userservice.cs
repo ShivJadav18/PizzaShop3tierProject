@@ -129,6 +129,25 @@ public class Userservice : IUserservice{
 
     public ProfileViewModel UpdateProfileService(ProfileViewModel usertemp){
         usertemp.Updatedat = DateTime.Now;
+
+        if(usertemp.ProfileImage != null){
+            
+            var fileName = Path.GetFileNameWithoutExtension(usertemp.ProfileImage.FileName);
+                var extension = Path.GetExtension(usertemp.ProfileImage.FileName);
+                var uniqueFileName = $"{fileName}_{Guid.NewGuid()}{extension}";
+
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UploadedImages");
+                var path = Path.Combine(uploadsFolder, uniqueFileName);
+
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    usertemp.ProfileImage.CopyTo(fileStream);
+                }
+
+                // Save the relative path to the usertemp property
+                usertemp.Imageurl = $"UploadedImages/{uniqueFileName}";
+        }
+
         User updateduser = _repouser.UpdateUser(usertemp);
         
 

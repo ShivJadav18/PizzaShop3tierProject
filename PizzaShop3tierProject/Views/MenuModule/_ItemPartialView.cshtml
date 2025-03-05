@@ -1,8 +1,10 @@
 @model PizzaShop.Repository.ViewModels.ItemsandCategories
-
+@using PizzaShop.Repository.ViewModels;
+@using PizzaShop.Repository.Data;
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
 <div class="col-2 categories-list-sec">
     <div class="header d-flex justify-content-between align-items-center p-1">
         <h5 class="text-center Category">Category</h5>
@@ -19,8 +21,7 @@
                     </div>
                     <div class="modal-body">
                         <form action="">
-    using PizzaShop.Repository.ViewModels;
-    using PizzaShop.Repository.Data;
+
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control" id="Categoryname" placeholder="Category Name">
                                 <label for="Categoryname">Name</label>
@@ -43,20 +44,29 @@
     </div>
     <nav class="sidebar overflow-auto" id="spc">
         <div class="list-group list-group-flush">
+            @{
+                int i = 0; string sel = "";
+            }
             @foreach (var category in Model.categories)
             {
-                <div class="list-group-item list-group-item-action Categories d-flex justify-content-between align-items-center"
-                    data-categoryid="@category.CategoryId">
-                    <div class="d-flex align-items-center">
+                if (i == 0)
+                {
+                    sel = "selected-category-modifier";
+                }
+                <div class="list-group-item list-group-item-action Categories d-flex justify-content-between align-items-center @sel"
+                    data-categoryid="@category.CategoryId" id="@i">
+                    <div class="d-flex align-items-center ">
                         <i class="fa fa-th m-2" aria-hidden="true"></i>
                         @category.Categoryname
                     </div>
-                    <div class="d-flex align-items-center d-none">                     
-                        <i class="fa fa-pencil Edit-Category m-3" 
-                            aria-hidden="true"></i>
-                        <i class="fa fa-trash-o" id="delete-category-btn" data-bs-target="#delete-category-conf" data-bs-toggle="modal" aria-hidden="true"></i>
+                    <div class="d-flex align-items-center d-none">
+                        <i class="fa fa-pencil Edit-Category m-3" aria-hidden="true"></i>
+                        <i class="fa fa-trash-o" id="delete-category-btn" data-bs-target="#delete-category-conf"
+                            data-bs-toggle="modal" aria-hidden="true"></i>
                     </div>
                 </div>
+                sel = "";
+                i++;
             }
         </div>
     </nav>
@@ -89,36 +99,240 @@
         </div>
     </div>
     <div class="modal fade" id="delete-category-conf" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Delete Confirmation</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body text-center">
-                        <img src="~/images/toppng.com-warning-icon-2400x2400.png" alt="warning" class="warning-img">
-                        <p>Are you sure you want to delete this Category?</p>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-center">
-                        <button type="button" class="btn btn-nonsecondary imp" id="category-delete-btn" data-bs-dismiss="modal">Yes</button>
-                        <button type="button" class="btn btn-nonprimary imp" data-bs-dismiss="modal">No</button>
-                    </div>
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Delete Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="~/images/toppng.com-warning-icon-2400x2400.png" alt="warning" class="warning-img">
+                    <p>Are you sure you want to delete this Category?</p>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="button" class="btn btn-nonsecondary imp" id="category-delete-btn"
+                        data-bs-dismiss="modal">Yes</button>
+                    <button type="button" class="btn btn-nonprimary imp" data-bs-dismiss="modal">No</button>
                 </div>
             </div>
         </div>
+    </div>
 </div>
 <div class="items-list-sec col" id="items-list-sec">
-@await Html.PartialAsync("_Items",Model.itemmodel)
+    <div class="header">
+        <h5 class="Category">Items</h5>
+    </div>
+    <form class="d-flex justify-content-end">
+        <div class="input-group w-25 m-2">
+            <input type="text" class="form-control" id="search-items" placeholder="Search" />
+            <span class="input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span>
+        </div>
+        <div class="btn delete-btn m-2">
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+        </div>
+        <div class="btn imp m-2" data-bs-target="#AddItem" data-bs-toggle="modal">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            New Item
+        </div>
+    </form>
+    <div class="modal fade " id="AddItem" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header b-0">
+                    <h5 class="modal-title" id="staticBackdropLabel">Add New Menu Item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="col">
+                        <div class="row">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <div class="form-floating">
+                                            <select name="CategoryId" id="ItemsCategory" class="form-select"
+                                                placeholder="Select Categories">
+                                                @foreach(var category in Model.categories){
+                                                    <option value="@category.CategoryId">@category.Categoryname</option>
+                                                }
+                                            </select>
+                                            <label for="ItemsCategory">Categories</label>
+                                        </div>
+                                        <p class="validation-msg" id="ItemsCategory-msg"></p>
+                                    </div>
+                                    <div class="col mb-3">
+                                        <div class="form-floating">
+                                            <input type="text"  class="form-control" name="Name" id="ItemName"
+                                                placeholder="Item Name">
+                                            <label for="ItemName">Name*</label>
+                                        </div>
+                                         <p class="validation-msg" id="ItemName-msg"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <div class="form-floating">
+                                            <select name="Itemtype" id="ItemType" class="form-select"
+                                                placeholder="Select Type">
+                                                <option value="nonveg">Non Veg</option>
+                                                <option value="veg">Vegetarian</option>
+                                                <option value="vegan">vegan</option>
+                                            </select>
+                                            <label for="ItemType">Item Type</label>
+                                        </div>
+                                         <p class="validation-msg" id="ItemType-msg"></p>
+                                    </div>
+                                    <div class="col mb-3">
+                                        <div class="form-floating">
+                                            <input type="text" name="Rate" class="form-control" id="Rate"
+                                                placeholder="Category Name" value="0">
+                                            <label for="Rate">Rate*</label>
+                                        </div>
+                                         <p class="validation-msg" id="Rate-msg"></p>
+                                    </div>
+                                    <div class="col mb-3">
+                                        <div class="form-floating">
+                                            <input type="text" name="Quantity"  class="form-control" id="Quantity"
+                                                placeholder="Category Name" value="0">
+                                            <label for="Quantity">Quantity*</label>
+                                        </div>
+                                         <p class="validation-msg" id="Quantity-msg"></p>
+                                    </div>
+                                    <div class="col mb-3">
+                                        <div class="form-floating">
+                                            <select name="ItemType" name="UnitId" id="Unit" class="form-select"
+                                                placeholder="Select Unit">
+                                                <option value="1">Pcs</option>
+                                                <option value="2">gm</option>
+                                            </select>
+                                            <label for="Unit">Unit</label>
+                                        </div>
+                                         <p class="validation-msg" id="Unit-msg"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div
+                                        class="form-check form-switch p-0 d-flex align-items-center justify-content-center col">
+                                        <input class="form-check-input toggle-checkbox common-checkbox-modal m-1"
+                                            type="checkbox" name="Isavailable" id="Isavailable" role="switch" />
+                                        <p class="m-0">Available</p>
+                                    </div>
+                                    <div
+                                        class="form-check form-switch p-0 d-flex align-items-center justify-content-center col">
+                                        <input class="form-check-input toggle-checkbox m-1 common-checkbox-modal"
+                                            type="checkbox" name="Defaulttax" id="DefaultTax"  role="switch" />
+                                        <p class="m-0">DefaultTax</p>
+                                    </div>
+                                    <div class="col mb-3">
+                                        <div class="form-floating">
+                                            <input type="text" name="Taxpercentage"  class="form-control" id="TaxPercentage"
+                                                placeholder="Category Name">
+                                            <label for="TaxPercentage">Tax Percentage</label>
+                                        </div>
+                                         <p class="validation-msg" id="TaxPercentage-msg"></p>
+                                    </div>
+                                    <div class="col mb-3">
+                                        <div class="form-floating">
+                                            <input type="text" name="Shortcode" class="form-control" id="ShortCode"
+                                                placeholder="Category Name">
+                                            <label for="ShortCode">Short Code</label>
+                                        </div>
+                                         <p class="validation-msg"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <div class="form-floating">
+                                            <textarea type="text" name="Description" asp-for="@Model.newItem.Description" class="form-control" id="ItemDescription"
+                                                placeholder="Item Description"></textarea>
+                                            <label for="ItemDescription">Description</label>
+                                        </div>
+                                         <p class="validation-msg" id="description-msg"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <p>Upload Image</p>
+                                    <div class="col">
+                                        <div class=" border-dashed rounded-1 text-center mb-3 mb-lg-0">
+                                            <input type="file" name="ItemImage" id="Item-Image" class="d-none">
+                                            <img src="~/images/Default_pfp.svg.png"  alt="profile-pic" id="ItemImageShown" class="rounded-circle profile-info-pic m-2" height="90">
+                                            <label for="file" role="button" id="Item-Image-input" class="py-5 w-100">
+                                                 Drag and
+                                                Drop or Browse Files</label>
+                                        </div>
+                                         <p class="validation-msg"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 modifier-select-section">
+                                <div class="form-floating m-2">
+                                    <select name="ModifierGroup" id="ModifierGroupSelect" class="form-select"
+                                        placeholder="Select Modifier Group(s)">
+                                    </select>
+                                    <label for="ModifierGroupSelect">Select Modifier Group(s)</label>
+                                </div>
+                                <div class="selected-modifiers-section m-2">
+                                    <div class="selected-modifier p-2">
+                                        <div
+                                            class="selected-modifier-header d-flex justify-content-between align-items-center">
+                                            <h5>Size Option</h5>
+                                            <div><i class="fa fa-trash" aria-hidden="true"></i></div>
+                                        </div>
+                                        <div class="selected-modifier-dropdowns d-flex">
+                                            <div class="form-floating w-50 m-2">
+                                                <select name="ModifierGroup" id="ModifierGroupSelect"
+                                                    class="form-select  modifiers-dropdowns" placeholder="Select Modifier Group(s)">
+                                                </select>
+                                                
+                                            </div>
+                                            <div class="form-floating w-50 m-2">
+                                                <select name="ModifierGroup" id="ModifierGroupSelect"
+                                                    class="form-select  modifiers-dropdowns" placeholder="Select Modifier Group(s)">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-nonprimary imp" id="Add-new-item-save">Save</button>
+                    <button type="button" class="btn btn-nonsecondary no-imp" data-bs-dismiss="modal">Cancle</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="items-partial" id="items-partial">
+        @Html.Partial("_Items", Model.itemmodel)
+    </div>
 </div>
 <script>
     $(document).ready(() => {
+        var selected = 0;
 
+        $("#Item-Image-input").on("click",() => {
+            $("#Item-Image").click();
+        })
+         $("#Item-Image").change( function(event){
+            let file = event.target.files[0];
+
+            if (file) {
+                let reader = new FileReader();
+                reader.onload = function (e){
+                    $("#ItemImageShown").attr("src", e.target.result); // Set preview
+                };
+                reader.readAsDataURL(file);
+                
+            }
+        });
         $(".Categories").mouseenter(function () {
             $(this).children().last().removeClass("d-none");
-            
-        })
 
+        })
 
         $(".Categories").mouseleave(function () {
             $(this).children().last().addClass("d-none");
@@ -152,12 +366,13 @@
                     }
                 }
             })
-        })      
+        })
 
-        $(".Edit-Category").click( function (e) {
-            var categoryid = e.target.closest(".Categories").dataset.categoryid; 
-         
-             $.ajax({
+        $(".Edit-Category").click(function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            var categoryid = e.target.closest(".Categories").dataset.categoryid;
+            $.ajax({
                 url: "/MenuModule/EditCategory",
                 data: {
                     categoryid: categoryid
@@ -165,69 +380,179 @@
                 success: (response) => {
                     if (response.success) {
                         $("#CategoryEditDescription").val(response.description);
-                        $("#CategoryEditname").val(response.name);                        
+                        $("#CategoryEditname").val(response.name);
                         $("#EditCategory").modal("show");
                     }
                 }
             })
         })
-    
-    $("#Save-Edit-category").click((e) => {
 
-        var name = $("#CategoryEditname").val();
-        var description = $("#CategoryEditDescription").val();
+        $("#Save-Edit-category").click((e) => {
 
-        $.ajax({
-            url : "/MenuModule/EditCategory",
-            type : "POST",
-            data : {
-                categoryname : name,
-                categorydescription : description
-            },
-            success : (response) => {
-                if(response.success) {
-                    alert(response.message);
+            var name = $("#CategoryEditname").val();
+            var description = $("#CategoryEditDescription").val();
+
+            $.ajax({
+                url: "/MenuModule/EditCategory",
+                type: "POST",
+                data: {
+                    categoryname: name,
+                    categorydescription: description
+                },
+                success: (response) => {
+                    if (response.success) {
+                        alert(response.message);
+                        window.location.reload();
+                    }
+                }
+            })
+
+        })
+
+        $("#category-delete-btn").click((e) => {
+            var categoryid = $("#delete-category-btn").closest(".Categories").data("categoryid");
+
+            $.ajax({
+                url: "/MenuModule/DeleteCategory",
+                data: {
+                    id: categoryid
+                },
+                success: (response) => {
+                    if (response.success) {
+                        alert(response.message);
+                        window.location.reload();
+                    }
+                }
+            })
+        })
+
+        $(".Categories").click(function () {
+            $(this).addClass("selected-category-modifier");
+            $(`#${selected}`).removeClass("selected-category-modifier");
+            var categoryid = $(this).data("categoryid");
+
+            var searchval = $("#search-items").val();
+            loadItems(1, searchval, categoryid);
+            selected = $(this).attr("id");
+        })
+        $("#search-items").on("input", () => {
+            setTimeout(() => { loadItems(1, $("#search-items").val()) }, 500);
+        });
+        $("#Add-new-item-save").on("click",(e) => {
+            e.preventDefault();
+           
+            var ratepattern = /^[0-9]+\.[0-9]{2}$/;
+            var Quantitypattern = /^[0-9]+$/
+            var categoryid = $("#ItemsCategory").val();
+            var name = $("#ItemName").val();
+            var ItemType = $("#ItemType").val();
+            var Rate = parseInt($("#Rate").val());
+            var Quantity = $("#Quantity").val();
+            var Unit = $("#Unit").val();
+            var Isavailable = $("#Isavailable").is(":checked");
+            var DefaultTax = $("#DefaultTax").is(":checked");
+            var TaxPercentage = $("#TaxPercentage").val();
+            var ShortCode = $("#ShortCode").val();
+            var description = $("#ItemDescription").val();
+            var Itemimage = $("#Item-Image")[0].files[0];
+            var isvalid = true;
+
+            if(!categoryid) {
+                $("#ItemsCategory-msg").text("Category can not be Empty.");
+                isvalid = false;
+            }
+            if(!name) {
+                $("#ItemName-msg").text("Name can not be Empty.")
+                isvalid = false;
+            }
+            if(!ItemType) {
+                $("#ItemType-msg").text("Item Type can not be Empty.");
+                isvalid = false;
+            }
+            if(!Rate) {
+                $("#Rate-msg").text("Rate can not be Empty.")
+                isvalid = false;
+            }
+            if(!Quantity) {
+                $("#Quantity-msg").text("Quantity can not be Empty");
+                isvalid = false;
+            }
+            if(!Unit) {
+                 $("#Unit-msg").text("Unit can not be Empty");
+                isvalid = false;
+            }
+            if(!TaxPercentage) {
+                 $("#TaxPercentage-msg").text("TaxPercentage can not be Empty");
+                isvalid = false;
+            }
+            if(!description) {
+                $("#description-msg").text("Description can not be Empty");
+                isvalid = false;
+            }
+
+            @* if(Rate && !ratepattern.test(Rate)){
+                 $("#Rate-msg").text("Rate must be in the form of xx.yy and can only contain number");
+                isvalid = false;
+            } *@
+
+            if(!Quantitypattern.test(Quantity)){
+                $("#Quantity-msg").text("Quantity can only contain number.");
+                isvalid = false;
+            }
+
+            if(TaxPercentage && !Quantitypattern.test(TaxPercentage)){
+                $("#TaxPercentage-msg").text("Taxpercentage can only contain number.");
+                isvalid = false;
+            }
+
+            if(!isvalid){
+                return ;
+            }
+            var formData = new FormData();
+            formData.append("Name", name);
+            formData.append("CategoryId", categoryid);
+            formData.append("Description", description);
+            formData.append("UnitId", Unit);
+            formData.append("Itemtype", ItemType);
+            formData.append("Rate", Rate);
+            formData.append("Taxpercentage", TaxPercentage);
+            formData.append("Defaulttax", DefaultTax);
+            formData.append("Quantity", Quantity);
+            formData.append("Shortcode", ShortCode);
+            formData.append("Isavailable", Isavailable);
+
+    if (Itemimage) {
+        formData.append("ItemImage", Itemimage);  // Append the file
+    }
+            $.ajax({
+                url : "/MenuModule/AddNewItemAction",
+                type : "POST",
+                data : formData,
+                processData : false,
+                contentType : false,
+                success : (response) => {
                     window.location.reload();
                 }
-            }
+            })
+
         })
 
     })
-
-    $("#category-delete-btn").click((e) => {
-        var categoryid = $("#delete-category-btn").closest(".Categories").data("categoryid");
-
+    function loadItems(pageno, searchval, categoryid = 2) {
+        var count = $("#itemCount").val();
         $.ajax({
-            url : "/MenuModule/DeleteCategory",
-            data : {
-                id : categoryid
+            url: "/MenuModule/ItemsForpagination",
+            type: "GET",
+            data: {
+                count: count,
+                pageno: pageno,
+                searchval: searchval,
+                categoryid: categoryid
             },
-            success : (response) => {
-                if(response.success) {
-                    alert(response.message);
-                    window.location.reload();
-                }
+            success: (data) => {
+                $("#items-partial").html(data);
             }
         })
-    })
+    }
 
-    $(".Categories").click(function () {
-       
-        var categoryid = $(this).data("categoryid");
-        alert(categoryid);
-        $.ajax({
-            url : "/MenuModule/ItemsCategoryvise",
-            type : "POST",
-            data : {
-                categoryid : categoryid
-            },
-            success : (data) => {
-                alert();
-                $("#items-list-sec").html(data);
-            }
-        })
-    })
-
-    })
-     
 </script>

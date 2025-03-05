@@ -8,4 +8,8 @@ public class Items{
     public int count{get; set;}
     public int totalitems{get; set;}
 
+    public int pageno{get;set;}
+    public int categoryid{get; set;}
+    public string searchval{get;set;}
+
 }

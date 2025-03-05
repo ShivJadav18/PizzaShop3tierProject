@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 using NuGet.Packaging.Signing;
 using PizzaShop.Repository.Data;
 
@@ -45,6 +46,8 @@ public class ProfileViewModel{
 
     public DateTime? Updatedat {get; set;}
     public int? Updatedby{get; set;}
+
+    public IFormFile ProfileImage{get;set;}
 
     public static implicit operator ProfileViewModel(User v)
     {

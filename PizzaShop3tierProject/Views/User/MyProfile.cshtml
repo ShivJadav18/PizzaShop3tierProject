@@ -21,7 +21,7 @@
                     <div class="d-flex">
                     <img src="~/images/Default_pfp.svg.png"  alt="profile-pic" id="imageShown" class="rounded-circle profile-info-pic m-2" height="90">
                     <i class="fa fa-camera" aria-hidden="true" id="camera-icon"></i>
-                    <input type="file" class="d-none" id="image-input"/>
+                    
                       <div class="align-items-center ">
                         <h4>@Html.DisplayFor(model => model.Username)</h4>
                         <p id="role">@Html.DisplayFor(model => model.Rolename)</p>
@@ -29,7 +29,8 @@
                     </div>
                     <p>@Html.DisplayFor(model => model.Email)</p>
                   </div>
-                    <form class="col m-2" action="/User/MyProfile" method="post">
+                    <form class="col m-2" action="/User/MyProfile" method="post" enctype="multipart/form-data">
+                    <input type="file" asp-for = "ProfileImage" class="d-none" accept="image/*" id="image-input"/>
                     <input type="hidden" value="@Html.DisplayFor(model => model.Email)" name="Email">
                         <div class="row mb-3">
                             <div class="col">
@@ -121,7 +122,7 @@
                 cameraicon.on("click",(e) => {
                   inputfieldimage.click();
                 });
-
+                
                 $("#image-input").change( function(event){
             let file = event.target.files[0];
 

@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Common;
 using PizzaShop.Repository.Data;
 using PizzaShop.Repository.ViewModels;
 using PizzaShop.Service.Interfaces;
@@ -21,10 +22,28 @@ public class MenuModuleController : Controller{
         return View(categoriesanditem);
     }
 
+    [Authorize]
     [HttpPost]
-    public IActionResult ItemsCategoryvise(int categoryid){
-        var categoriesanditem = GetItemsandCategories(categoryid);
-        return PartialView("_Items",categoriesanditem.itemmodel);
+    public IActionResult AddNewItemAction(NewItem newItem){
+
+        string token = Request.Cookies["jwtCookie"];
+        var userid = GetClaimValueHelper(token,"Userid");
+        newItem.Createdby = Convert.ToInt32(userid);
+        newItem.Updatedby = Convert.ToInt32(userid);
+        Message message = _menuservice.AddNewItemService(newItem);
+
+        if(message.error){
+            TempData["error"] = message.errorMessage;
+            return Json(new{success = false});
+        }
+        TempData["success"] = "New Item is successfully added";
+       return Json(new{success = true});
+    }
+   
+    public IActionResult ItemsForpagination(Items itemsmodel){
+        Items itemobj = _menuservice.GetItemsModel(itemsmodel);
+
+        return PartialView("_Items",itemobj);
     }
 
     [Authorize]
@@ -95,8 +114,8 @@ public class MenuModuleController : Controller{
         return categories;
     }
 
-    public ItemsandCategories GetItemsandCategories(int categoryid = 2){
-        var ItemsandCategories = _menuservice.GetItemsandCategoriesService(categoryid);
+    public ItemsandCategories GetItemsandCategories(int categoryid = 0,string searchval = "",int count = 5, int pageno = 1){
+        var ItemsandCategories = _menuservice.GetItemsandCategoriesService(categoryid,searchval,count,pageno);
         return ItemsandCategories;
     }
 

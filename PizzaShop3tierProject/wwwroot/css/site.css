@@ -29,7 +29,10 @@ html {
 }
 .content{
   background-color: #D8EFF7;
-  
+}
+#ItemImageShown{
+  display: relative;
+  top : 40px;
 }
 body, html{
   height: 100%;
@@ -131,6 +134,7 @@ body, html{
   }
   
 } */
+
 .second-part-dashboard div div{
   background-color: #ffffff;
   border-radius: 10px;
@@ -272,6 +276,9 @@ height: 38px;
   border: 1px solid #0066A8 !important;
   color: #0066A8 !important;
 }
+.modifier-select-section{
+  background-color: #FDF5E6;
+}
 .Category{
   color: #0066A8;
 }
@@ -283,13 +290,21 @@ height: 38px;
 }
 .nav-item{
   width: 10rem;
-
+}
+.selected-modifiers-section{
+  color: #808080;
 }
 .selected-tab{
   color: #0066a8 !important;
   border-style: none none solid none !important;
   border-color: #0066A8 !important;
   background-color: #ffffff;
+}
+.selected-category-modifier{
+  color: #0066a8 !important;
+}
+.modifiers-dropdowns{
+  border-radius: 25%;
 }
 .border-dashed{
   border: 1px dashed !important;

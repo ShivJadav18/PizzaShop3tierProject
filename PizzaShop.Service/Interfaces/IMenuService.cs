@@ -16,7 +16,9 @@ public interface IMenuService{
 
     public void DeleteCategoryService(int id);
 
-    public List<Item> GetItemsService(int categoryid);
+    public ItemsandCategories GetItemsandCategoriesService(int categoryid,string searchval = "",int count = 5,int pageno = 1);
 
-    public ItemsandCategories GetItemsandCategoriesService(int categoryid);
+     public Items GetItemsModel(Items items);
+
+     public Message AddNewItemService(NewItem newItem);
 }

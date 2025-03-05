@@ -277,3 +277,6 @@ D:\PizzaShop3tierProject\PizzaShop3tierProject\obj\Debug\net7.0\refint\PizzaShop
 D:\PizzaShop3tierProject\PizzaShop3tierProject\obj\Debug\net7.0\PizzaShop3tierProject.pdb
 D:\PizzaShop3tierProject\PizzaShop3tierProject\obj\Debug\net7.0\PizzaShop3tierProject.genruntimeconfig.cache
 D:\PizzaShop3tierProject\PizzaShop3tierProject\obj\Debug\net7.0\ref\PizzaShop3tierProject.dll
+d:\PizzaShop3tierProject\PizzaShop3tierProject\bin\Debug\net7.0\Microsoft.Extensions.Primitives.dll
+d:\PizzaShop3tierProject\PizzaShop3tierProject\bin\Debug\net7.0\System.Text.Encodings.Web.dll
+d:\PizzaShop3tierProject\PizzaShop3tierProject\bin\Debug\net7.0\runtimes\browser\lib\net7.0\System.Text.Encodings.Web.dll

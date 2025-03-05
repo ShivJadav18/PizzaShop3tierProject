@@ -1,3 +1,4 @@
+using PizzaShop.Repository.ViewModels;
 using PizzaShop.Repository.Data;
 
 namespace PizzaShop.Repository.Interfaces;
@@ -11,5 +12,8 @@ public interface IMenu{
 
      public void RemoveCategory(Category category);
 
-      public List<Item> GetItems(int categoryid);
+      public List<Item> GetItems(int categoryid,string searchval);
+
+      public Message AddItem(Item item);
+
 }

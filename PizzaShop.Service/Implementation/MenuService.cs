@@ -19,34 +19,89 @@ public class MenuService : IMenuService{
 
     }
 
-    public List<Item> GetItemsService(int categoryid){
-        var items = _menu.GetItems(categoryid);
-        return items;
-    }
-
     public List<Category> GetCategoriesService(){
         var categories = _menu.GetCategories();
-        var ItemsandCategories = new ItemsandCategories{
-            categories = categories
-        };
         return categories;
     }
-    public ItemsandCategories GetItemsandCategoriesService(int categoryid){
-        var items = GetItemsService(categoryid);
-        var categories = GetCategoriesService();
-        var totalitems = items.Count;
-        Items itemmodel = new Items{
-            items = items,
+
+    public Items GetItemsModel(Items items){
+        var totalitemslist = _menu.GetItems(items.categoryid,items.searchval);
+        var totalitems = totalitemslist.Count();
+
+        var itemslist =  totalitemslist.Skip((items.pageno-1)* items.count).Take(items.count).ToList();
+
+        var ItemsObj = new Items{
             totalitems = totalitems,
-            count = 5
+            items = itemslist,
+            count = items.count,
+            pageno = items.pageno,
+            categoryid = items.categoryid,
+            searchval = items.searchval
         };
+
+        return ItemsObj;
+    }
+    
+    public Message AddNewItemService(NewItem newItem){
+
+        if(newItem.ItemImage != null){
+            var fileName = Path.GetFileNameWithoutExtension(newItem.ItemImage.FileName);
+                var extension = Path.GetExtension(newItem.ItemImage.FileName);
+                var uniqueFileName = $"{fileName}_{Guid.NewGuid()}{extension}";
+
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UploadedImages");
+                var path = Path.Combine(uploadsFolder, uniqueFileName);
+
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    newItem.ItemImage.CopyTo(fileStream);
+                }
+
+                // Save the relative path to the newItem property
+                newItem.Imageurl = $"UploadedImages/{uniqueFileName}";
+        }
+
+        Item item = new Item{
+            Name = newItem.Name,
+            CategoryId = newItem.CategoryId,
+            Description = newItem.Description,
+            UnitId = newItem.UnitId,
+            Imageurl = newItem.Imageurl,
+            Itemtype = newItem.Itemtype,
+            Rate = newItem.Rate,
+            Taxpercentage = newItem.Taxpercentage,
+            Defaulttax = newItem.Defaulttax,
+            Quantity = newItem.Quantity,
+            Shortcode = newItem.Shortcode,
+            Isavailable = newItem.Isavailable,
+            Createdby = newItem.Createdby,
+            Updatedby = newItem.Updatedby
+        };
+
+        Message message = _menu.AddItem(item);
+
+       
+        return message;
+    }
+
+    public ItemsandCategories GetItemsandCategoriesService(int categoryid,string searchval = "",int count = 5,int pageno = 1){
+       
+        var categories = GetCategoriesService();
+        categoryid = categories[0].CategoryId;
+        var itemobj = new Items{
+            categoryid=categoryid,
+            searchval =searchval,
+            count = count,
+            pageno =pageno
+        };
+        var itemmodel = GetItemsModel(itemobj);
+        
         ItemsandCategories ItemsandCategories = new ItemsandCategories{
             categories = categories,
             itemmodel = itemmodel
         };
 
         return ItemsandCategories;
-
     }
     public Category GetCategoryById(int categoryid){
         var categories = _menu.GetCategories();
@@ -76,4 +131,7 @@ public class MenuService : IMenuService{
         _menu.UpdateCategory(category);
         
     }
+
+
+
 }

@@ -96,6 +96,7 @@ public class Userop : IUser{
         user.Contactnumber = usertemp.Contactnumber;
         user.Updatedby = usertemp.Updatedby;
         user.Updatedat = usertemp.Updatedat;
+        user.Imageurl = usertemp.Imageurl;
         
 
         _context.SaveChanges();
