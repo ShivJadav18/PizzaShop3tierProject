@@ -16,4 +16,7 @@ public interface IMenu{
 
       public Message AddItem(Item item);
 
+      public Item GetItem(int itemid);
+
+      public Message UpdateItem(NewItem item);
 }

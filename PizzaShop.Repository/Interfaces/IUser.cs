@@ -20,4 +20,6 @@ using PizzaShop.Repository.ViewModels;
      public bool EditUser(Usertemp user);
 
      public void DeleteUser(int id);
+
+     public Message IsRepeatedUsername(string username,string email);
 }

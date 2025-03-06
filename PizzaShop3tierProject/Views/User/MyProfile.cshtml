@@ -19,7 +19,9 @@
                   </div>
                   <div class="user-info d-flex justify-content-between align-items-center w-100 m-2 p-2">
                     <div class="d-flex">
-                    <img src="~/images/Default_pfp.svg.png"  alt="profile-pic" id="imageShown" class="rounded-circle profile-info-pic m-2" height="90">
+                    @{string imageurl = String.IsNullOrEmpty(Model.Imageurl)?Url.Content("~/images/Default_pfp.svg.png"): Url.Content("~/" + Model.Imageurl);
+                    }
+                    <img src=@imageurl  alt="profile-pic" id="imageShown" class="rounded-circle profile-info-pic m-2" height="90">
                     <i class="fa fa-camera" aria-hidden="true" id="camera-icon"></i>
                     
                       <div class="align-items-center ">

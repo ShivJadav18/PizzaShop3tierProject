@@ -21,7 +21,9 @@ html {
   height: 30px;
   width: 30px;
 }
-
+#side-bar{
+  background-color: #ffffff !important;
+}
 *{
   margin: 0;
   padding: 0;
@@ -31,6 +33,10 @@ html {
   background-color: #D8EFF7;
 }
 #ItemImageShown{
+  display: relative;
+  top : 40px;
+}
+#ItemImageShownEdit{
   display: relative;
   top : 40px;
 }

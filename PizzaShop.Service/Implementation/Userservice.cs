@@ -128,6 +128,14 @@ public class Userservice : IUserservice{
     }
 
     public ProfileViewModel UpdateProfileService(ProfileViewModel usertemp){
+
+        Message message = _repouser.IsRepeatedUsername(usertemp.Username, usertemp.Email);
+
+        if(message.error){
+            usertemp.Username = "repeated";
+            return usertemp;
+        }
+
         usertemp.Updatedat = DateTime.Now;
 
         if(usertemp.ProfileImage != null){
@@ -150,12 +158,6 @@ public class Userservice : IUserservice{
 
         User updateduser = _repouser.UpdateUser(usertemp);
         
-
-        if(updateduser.Email == null && updateduser.Username == "repeated"){
-            usertemp.Username = "repeated";
-            return usertemp;
-        }
-
         if(updateduser.Email == null){
         return new ProfileViewModel{};
         }

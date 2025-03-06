@@ -23,6 +23,42 @@ public class MenuModuleController : Controller{
     }
 
     [Authorize]
+    public IActionResult EditItem(int itemid){
+
+        Item item = _menuservice.GetItemByIdService(itemid);
+
+        if(string.IsNullOrEmpty(item.Name)){
+            TempData["error"] = "There is some internal error.";
+            return Json(new { success  = false});
+        }
+        
+        return Json(new { success = true, 
+        Name = item.Name ,Imageurl = item.Imageurl,Description = item.Description, UnitId = item.UnitId, Itemtype = item.Itemtype, Rate = item.Rate, 
+        Quantity = item.Quantity, Defaulttax = item.Defaulttax
+        , Taxpercentage = item.Taxpercentage, Isavailable = item.Isavailable, CategoryId = item.CategoryId, Shortcode = item.Shortcode });
+    }
+
+    [Authorize]
+    [HttpPost]
+
+    public IActionResult EditItem(NewItem editeditem){
+        
+        string token = Request.Cookies["jwtCookie"];
+        var userid = GetClaimValueHelper(token,"Userid");
+        editeditem.Updatedby = Convert.ToInt32(userid);
+
+        Message message = _menuservice.UpdateItemService(editeditem);
+
+        if(message.error){
+            TempData["error"] = message.errorMessage;
+            return Json(new {success = false, message = message.errorMessage});
+        }
+        TempData["success"] = "Item is successfully updated.";
+        return Json(new {success = true});
+
+    }
+
+    [Authorize]
     [HttpPost]
     public IActionResult AddNewItemAction(NewItem newItem){
 

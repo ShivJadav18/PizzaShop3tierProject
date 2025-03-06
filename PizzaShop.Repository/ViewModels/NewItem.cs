@@ -4,6 +4,8 @@ namespace PizzaShop.Repository.ViewModels;
 
 public class NewItem{
 
+    public int ? itemid{get; set;}
+
     [Required(ErrorMessage = "Item Name can not be empty.")]
     [RegularExpression("/^[a-zA-Z]+$/")]
     public string Name { get; set; } = null!;
@@ -16,7 +18,7 @@ public class NewItem{
     public string? Itemtype { get; set; }
 
     [Required(ErrorMessage = "Item Rate can not be empty.")]
-    [RegularExpression("/^[0-9]+.[0-9]{2}$/",ErrorMessage ="Please Enter rate in 'xx.yy' formate.")]
+   
     public decimal? Rate { get; set; }  
 
     [Required(ErrorMessage = "Item Quantity can not be empty.")]
@@ -43,5 +45,6 @@ public class NewItem{
 
     public int? Updatedby { get; set; }
 
+    public DateTime? Updatedat{ get; set;}
     public IFormFile ItemImage{ get ; set;}
 }

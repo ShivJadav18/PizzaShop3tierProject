@@ -21,4 +21,8 @@ public interface IMenuService{
      public Items GetItemsModel(Items items);
 
      public Message AddNewItemService(NewItem newItem);
+
+     public Item GetItemByIdService(int itemid);
+
+     public Message UpdateItemService(NewItem editeditem);
 }

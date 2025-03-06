@@ -24,6 +24,47 @@ public class MenuService : IMenuService{
         return categories;
     }
 
+    public Item GetItemByIdService(int itemid){
+
+        Item item = _menu.GetItem(itemid);
+
+        if(string.IsNullOrEmpty(item.Name)){
+        return new Item{};
+        }
+        return item;
+
+    }
+
+    public Message UpdateItemService(NewItem editeditem){
+
+        if(editeditem.ItemImage != null){
+            
+            var fileName = Path.GetFileNameWithoutExtension(editeditem.ItemImage.FileName);
+                var extension = Path.GetExtension(editeditem.ItemImage.FileName);
+                var uniqueFileName = $"{fileName}_{Guid.NewGuid()}{extension}";
+
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UploadedImages");
+                var path = Path.Combine(uploadsFolder, uniqueFileName);
+
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    editeditem.ItemImage.CopyTo(fileStream);
+                }
+
+                // Save the relative path to the usertemp property
+                editeditem.Imageurl = $"UploadedImages/{uniqueFileName}";
+        }
+        editeditem.Updatedat = DateTime.Now;
+        Message message = _menu.UpdateItem(editeditem);
+
+        if(message.error){
+            return message;
+        }
+
+        return new Message{ error = false };
+
+    }
+
     public Items GetItemsModel(Items items){
         var totalitemslist = _menu.GetItems(items.categoryid,items.searchval);
         var totalitems = totalitemslist.Count();

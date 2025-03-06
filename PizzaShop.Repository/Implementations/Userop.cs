@@ -76,14 +76,19 @@ public class Userop : IUser{
         return userobj;
     }
 
+    public Message IsRepeatedUsername(string username,string email){
+
+        var repeatedUser = _context.Users.FirstOrDefault(u => u.Username == username && u.Email != email);
+
+        if(repeatedUser != null){
+            return new Message{error = true , errorMessage = "You can not use this Username."};
+        }
+        return new Message{error = false};
+    }
     public User UpdateUser(ProfileViewModel usertemp){
         try{
         var user = _context.Users.Include(u => u.Role).FirstOrDefault(u => u.Email == usertemp.Email);
-        var temp = _context.Users.FirstOrDefault(u => u.Username == usertemp.Username);
-
-        if(temp != null){
-            return new User{Username = "repeated"};
-        }
+        
 
         user.Firstname = usertemp.Firstname;
         user.Lastname = usertemp.Lastname;

@@ -20,15 +20,17 @@
 <body>
    
     <div class="container-fluid row align-items-center justify-content-center p-0 w-100">
-         <div class="side-bar col-auto" id="side-bar">
-            <div class="dash-logo-container w-100 mb-3 d-flex align-items-center justify-content-center">
+         <div class="side-bar col-auto offcanvas-md offcanvas-start" id="side-bar">
+            <div class="dash-logo-container w-100 mb-3 d-flex align-items-center justify-content-center offcanvas-header">
                 <img src="~/images/logos/pizzashop_logo.png" alt="pizzashop_logo">
                 <p class="mb-0">PIZZASHOP</p>
-                <div class="btn no-imp" id="sidebar-close">
+                @* <div class="btn no-imp" id="sidebar-close">
                     <i class="fa fa-close"></i>
-                </div>
+                </div> *@
+                <a class=" d-md-none btn-close" data-bs-toggle="offcanvas" href="#side-bar" role="button"
+            aria-controls="offcanvasExample"></a>
             </div>
-           <nav class="sidebar">
+           <nav class="sidebar offcanvas-body">
                 <div class="list-group list-group-flush">
                     <a href="~/Dashboard/Dashboardpage" class="list-group-item list-group-item-action @(controller == "Dashboard" ? "custom-active" : "") ">
                         <i class="fa fa-table m-2" aria-hidden="true"></i>Dashboard
@@ -59,8 +61,10 @@
         </div>
         <div class="nav-content d-flex flex-column col p-0 w-100 h-100 " id="nav-content">
             <nav class="navbar  d-flex justify-content-between align-items-center w-100 px-2">
-                <div class="nav navbar-nav ml-2" id="menu">
-                    <i class="fa fa-table d-none" aria-hidden="true"></i>
+                <div class="nav navbar-nav m-2" id="menu">
+                    <a data-bs-toggle="offcanvas" class="d-md-none d-block" href="#side-bar">
+                        <i class="fa fa-table" aria-hidden="true"></i>
+                    </a>
                 </div>
                 <div class="nav navbar-nav profile dropdown">
                     <a
