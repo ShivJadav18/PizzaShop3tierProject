@@ -13,7 +13,7 @@ using PizzaShop.Repository.ViewModels;
 
     public IQueryable<User> GetUserslist(string searchval);
 
-    public bool AddUser(User userobj);
+    public Message AddUser(User userobj);
 
     public User GetUserById(int id);
 
@@ -22,4 +22,10 @@ using PizzaShop.Repository.ViewModels;
      public void DeleteUser(int id);
 
      public Message IsRepeatedUsername(string username,string email);
+
+     public Message SetTokenForResetPass(int userid,string token,DateTime ExpireTime);
+
+     public Resettoken ValidateTokenForResetPass(string token);
+
+     public Message UpdateResetToken(Resettoken resettoken);
 }

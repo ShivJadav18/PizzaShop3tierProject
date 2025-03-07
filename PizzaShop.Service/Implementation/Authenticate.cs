@@ -12,21 +12,65 @@ using PizzaShop.Service.Interfaces;
 
 namespace PizzaShop.Service.Implementation;
 
-public class Authenticate : IAuthenticate{
+public class Authenticate : IAuthenticate
+{
 
     private readonly IUser _repouser;
 
-    public Authenticate (IUser repouser){
+    public Authenticate(IUser repouser)
+    {
         _repouser = repouser;
     }
 
-    public string GetAuthenticate(Userlogin user){
+    public Message ResetPassValidationService(string email)
+    {
+        Userlogin usertempobj = new Userlogin { Email = email };
+        User user = _repouser.GetUser(usertempobj);
+
+        string token = Guid.NewGuid().ToString();
+        DateTime ExpireTime = DateTime.Now.AddHours(24);
+        Message message = _repouser.SetTokenForResetPass(user.UserId, token, ExpireTime);
+
+        if (message.error)
+        {
+            return message;
+        }
+        message.errorMessage = token;
+        return message;
+    }
+
+    public Message TokenValidationForResetPass(string token)
+    {
+
+        Resettoken resettoken = _repouser.ValidateTokenForResetPass(token);
+
+        if (string.IsNullOrEmpty(resettoken.Token))
+        {
+            return new Message { error = true, errorMessage = "You are not authorized." };
+        }
+
+        if (resettoken.Isreseted == true)
+        {
+            return new Message { error = true, errorMessage = "You have used this link before." };
+        }
+
+        if (resettoken.Expiredat <= DateTime.Now)
+        {
+            return new Message { error = true, errorMessage = "This link is Expired." };
+        }
+
+        return new Message { error = false };
+    }
+
+    public string GetAuthenticate(Userlogin user)
+    {
         User userobj = _repouser.GetUser(user);
 
-        if(userobj.Email == null || !BCrypt.Net.BCrypt.Verify( user.Password,userobj.Password)){
+        if (userobj.Email == null || !BCrypt.Net.BCrypt.Verify(user.Password, userobj.Password))
+        {
             return "";
         }
-       
+
         var role = userobj.Role.Name;
         var claims = new[] {
                 new Claim(ClaimTypes.Role , role),
@@ -40,81 +84,144 @@ public class Authenticate : IAuthenticate{
         return token;
     }
 
-    public bool SendEmailForResetpass( string email,string baseUrl){
-        Userlogin usertempobj = new Userlogin{Email = email}; 
+    public bool SendEmailForResetpass(string email, string baseUrl, string token = "")
+    {
+        Userlogin usertempobj = new Userlogin { Email = email };
 
         User user = _repouser.GetUser(usertempobj);
 
-        if(user.Email == null){
+        if (user.Email == null)
+        {
             return false;
         }
 
-        EmailSendingHelper(email,baseUrl);
+        EmailSendingHelper(email, baseUrl, token);
         return true;
     }
 
-    public bool ResetPassService(string email,string password,string Currentpass = ""){
+    public bool ResetPassService(string email, string password, bool isForChangePassstring = false, string Currentpass = "")
+    {
 
-        Userlogin usertempobj = new Userlogin{Email = email,Password = BCrypt.Net.BCrypt.HashPassword(password)}; 
+        Userlogin usertempobj = new Userlogin { Email = email, Password = BCrypt.Net.BCrypt.HashPassword(password) };
         User user = _repouser.GetUser(usertempobj);
 
-        if(!BCrypt.Net.BCrypt.Verify(Currentpass,user.Password)){
-            return false;
-        }
+        if (isForChangePassstring)
+        {
 
-        User userobj = _repouser.SetPass(usertempobj,Currentpass);
-
-        if(userobj.Email == null){
-            return false;
-        }
-
-        return true;
-    }
-
-
-    private async void EmailSendingHelper(string email,string baseUrl){
-         // making of mail
-            var message = new MimeKit.MimeMessage();
-            message.From.Add(new MailboxAddress("Pizza Shop", "test.dotnet@etatvasoft.com"));
-            message.To.Add(new MailboxAddress("PizzaShop User", email));
-            message.Subject = "Reset your password ";
-
-            // making of url link
-           
-            var bodyBuilder = new BodyBuilder();
-            var url = $"{baseUrl}";
-
-            bodyBuilder.HtmlBody = $"Reset your password <a href='{url}/Authenticate/Resetpage'>Here </a>";
-
-
-            message.Body = bodyBuilder.ToMessageBody();
-
-            //sending of mail 
-            using (var client = new SmtpClient())
+            if (!BCrypt.Net.BCrypt.Verify(Currentpass, user.Password))
             {
-                await client.ConnectAsync("mail.etatvasoft.com", 587, false);
-                await client.AuthenticateAsync("test.dotnet@etatvasoft.com", "P}N^{z-]7Ilp");
-                await client.SendAsync(message);
-                await client.DisconnectAsync(true);
+                return false;
             }
 
-        return ;
-    }
-     private string GenerateJSONWebToken(Claim[] claims)
-        {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MyNameis_Shiv_Jadav_018_Tatvasoft_007_James_Bond"));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
- 
-            var token = new JwtSecurityToken(
-                issuer: "Pizzashop App",
-                audience: "dotnetclient",
-                expires: DateTime.Now.AddDays(1),
-                signingCredentials: credentials,
-                claims: claims
-                );
- 
-            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-    
+        User userobj = _repouser.SetPass(usertempobj, Currentpass);
+
+        if (userobj.Email == null)
+        {
+            return false;
+        }
+
+        return true;
+    }
+    public Message SendEmailTONewUserService(string email,string username,string baseUrl,string password){
+        try{
+            EmailSendingtoNewUser(email,username,baseUrl,password);
+            return new Message{error = false};
+        }catch(Exception e){
+            return new Message{error = true, errorMessage = e.Message};
+        }
+    }
+    private async void EmailSendingtoNewUser(string email,string username,string baseUrl,string password){
+         // making of mail
+        var message = new MimeKit.MimeMessage();
+        message.From.Add(new MailboxAddress("Pizza Shop", "test.dotnet@etatvasoft.com"));
+        message.To.Add(new MailboxAddress("PizzaShop User", email));
+        message.Subject = "Reset your password ";
+
+        // making of url link
+         string emailTemplate = System.IO.File.ReadAllText("wwwroot/templates/NewUser.html");
+
+        
+        emailTemplate = emailTemplate.Replace("[USERNAME]", username);
+        emailTemplate = emailTemplate.Replace("[PASSWORD]", password);
+        var bodyBuilder = new BodyBuilder();
+        var url = $"{baseUrl}";
+       
+         bodyBuilder.HtmlBody = emailTemplate;
+
+
+        message.Body = bodyBuilder.ToMessageBody();
+
+        //sending of mail 
+        using (var client = new SmtpClient())
+        {
+            await client.ConnectAsync("mail.etatvasoft.com", 587, false);
+            await client.AuthenticateAsync("test.dotnet@etatvasoft.com", "P}N^{z-]7Ilp");
+            await client.SendAsync(message);
+            await client.DisconnectAsync(true);
+        }
+
+        return;
+    }
+
+    private async void EmailSendingHelper(string email, string baseUrl,string token = "")
+    {
+        // making of mail
+        var message = new MimeKit.MimeMessage();
+        message.From.Add(new MailboxAddress("Pizza Shop", "test.dotnet@etatvasoft.com"));
+        message.To.Add(new MailboxAddress("PizzaShop User", email));
+        message.Subject = "Reset your password ";
+
+        var bodyBuilder = new BodyBuilder();
+        var url = $"{baseUrl}";
+       
+        bodyBuilder.HtmlBody = $"Reset your password <a href='{url}/Authenticate/Resetpage/?token={token}'>Here </a>";
+        message.Body = bodyBuilder.ToMessageBody();
+
+        //sending of mail 
+        using (var client = new SmtpClient())
+        {
+            await client.ConnectAsync("mail.etatvasoft.com", 587, false);
+            await client.AuthenticateAsync("test.dotnet@etatvasoft.com", "P}N^{z-]7Ilp");
+            await client.SendAsync(message);
+            await client.DisconnectAsync(true);
+        }
+
+        return;
+    }
+    private string GenerateJSONWebToken(Claim[] claims)
+    {
+        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MyNameis_Shiv_Jadav_018_Tatvasoft_007_James_Bond"));
+        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+        var token = new JwtSecurityToken(
+            issuer: "Pizzashop App",
+            audience: "dotnetclient",
+            expires: DateTime.Now.AddDays(1),
+            signingCredentials: credentials,
+            claims: claims
+            );
+
+        return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+
+    public string GetUserFromResetToken(string token)
+    {
+        Resettoken resettoken = _repouser.ValidateTokenForResetPass(token);
+
+        Message message = _repouser.UpdateResetToken(resettoken);
+
+        if (message.error)
+        {
+            return "";
+        }
+
+        int userid = Convert.ToInt32(resettoken.UserId);
+
+        User user = _repouser.GetUserById(userid);
+
+        return user.Email;
+    }
+
 }

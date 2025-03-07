@@ -1,11 +1,11 @@
 @model PizzaShop.Repository.ViewModels.ItemsandCategories
 @using PizzaShop.Repository.ViewModels;
 @using PizzaShop.Repository.Data;
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+@* <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-<div class="col-lg-2 col-md-12 col-12 categories-list-sec">
+    crossorigin="anonymous"></script> *@
+<div class="col-lg-2 d-lg-block d-none categories-list-sec">
     <div class="header d-flex justify-content-between align-items-center p-1">
         <h5 class="text-center Category">Category</h5>
         <div class="btn add-Category" data-bs-target="#AddCategory" data-bs-toggle="modal">
@@ -42,7 +42,7 @@
             </div>
         </div>
     </div>
-    <nav class="sidebar overflow-auto" id="spc">
+    <nav class="sidebar overflow-auto " id="spc">
         <div class="list-group list-group-flush">
             @{
                 int i = 0; string sel = "";
@@ -119,13 +119,35 @@
         </div>
     </div>
 </div>
+
 <div class="items-list-sec col" id="items-list-sec">
-    <div class="header">
+    <div class="header d-lg-block d-none">
         <h5 class="Category">Items</h5>
     </div>
+    <div class="dropdown d-lg-none d-flex align-items-center justify-content-between">
+        <button class="btn fs-3 dropdown-toggle c-color" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Category
+        </button>
+        <ul class="dropdown-menu" style="height: 40vh;">
+            @foreach (var category in Model.categories)
+            {
+                <li class="nav-item d-flex align-items-center dropdown-item" data-id="@category.CategoryId"
+                    data-name="@category.Categoryname" data-description="@category.Description">
+                    <i class="fa fa-th m-1" aria-hidden="true"></i>
+                    <a href="#" class="nav-link text-dark">@category.Categoryname</a>
+                    <div class="d-flex align-items-center">
+                        <i class="fa fa-pencil Edit-Category" aria-hidden="true"></i>
+                        <i class="fa fa-trash-o" id="delete-category-btn" data-bs-target="#delete-category-conf"
+                            data-bs-toggle="modal" aria-hidden="true"></i>
+                    </div>
+                </li>
+            }
+        </ul>
+        
+    </div>
     <form class="d-flex justify-content-end">
-        <div class="input-group w-25 m-2">
-            <input type="text" class="form-control" id="search-items" placeholder="Search" />
+        <div class="input-group w-auto m-2">
+            <input type="text" class="form-control w-25" id="search-items" placeholder="Search" />
             <span class="input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span>
         </div>
         <div class="btn delete-btn m-2">
@@ -256,7 +278,6 @@
                                 <div class="row">
                                     <p>Upload Image</p>
                                     <div class="col">
-
                                         <div class=" border-dashed rounded-1 text-center mb-3 mb-lg-0">
                                             <input type="file" name="ItemImage" id="Item-Image" class="d-none">
 
@@ -418,7 +439,7 @@
                                         <div class="form-floating">
                                             <input type="text" name="Shortcode" class="form-control" id="ShortCodeEdit"
                                                 placeholder="Category Name">
-                                                <input type="hidden" id = "itemid">
+                                            <input type="hidden" id="itemid">
                                             <label for="ShortCode">Short Code</label>
                                         </div>
                                         <p class="validation-msg-Edit"></p>
@@ -814,14 +835,14 @@
             formData.append("Quantity", Quantity);
             formData.append("Shortcode", ShortCode);
             formData.append("Isavailable", Isavailable);
-            formData.append("itemid",itemid);
-            
+            formData.append("itemid", itemid);
+
             if (Itemimage) {
                 formData.append("ItemImage", Itemimage);  // Append the file
-            }else{
-                formData.append("Imageurl",$("#Item-Image-Edit-url").val());
+            } else {
+                formData.append("Imageurl", $("#Item-Image-Edit-url").val());
             }
-            
+
             $.ajax({
                 url: "/MenuModule/EditItem",
                 type: "POST",

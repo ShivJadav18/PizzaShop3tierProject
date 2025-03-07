@@ -36,6 +36,10 @@ html {
   display: relative;
   top : 40px;
 }
+#UserImageShown{
+  display: relative;
+  top : 40px;
+}
 #ItemImageShownEdit{
   display: relative;
   top : 40px;
@@ -299,6 +303,18 @@ height: 38px;
 }
 .selected-modifiers-section{
   color: #808080;
+}
+.p-success{
+  background-color: #99d363;
+  padding: 5px;
+  color: white;
+  border-radius: 50px;
+}
+.p-danger{
+  background-color: #d36013;
+  padding: 5px;
+  color: white;
+  border-radius: 50px;
 }
 .selected-tab{
   color: #0066a8 !important;

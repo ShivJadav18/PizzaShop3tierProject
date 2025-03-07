@@ -66,11 +66,16 @@ public class AuthenticateController : Controller
     public async Task<IActionResult> Forgotpage(string email)
     {
         // storing the email id in tempdata.
-        TempData["user_email"] = email;
+       Message message = _userauth.ResetPassValidationService(email);
 
+        if(message.error){
+            TempData["error"] = message.errorMessage;
+             return Json(new { success = false});
+        }
+        string token = message.errorMessage;
         var baseUrl = $"{Request.Scheme}://{Request.Host}";
 
-        bool result = _userauth.SendEmailForResetpass(email, baseUrl);
+        bool result = _userauth.SendEmailForResetpass(email, baseUrl,token);
         if (result)
         {
             TempData["success"] = "Email For Reset Password is send.";
@@ -85,17 +90,35 @@ public class AuthenticateController : Controller
 
     public async Task<IActionResult> Resetpage()
     {
+        string token = Request.Query["token"];
+        Message message = _userauth.TokenValidationForResetPass(token);
+
+        if(message.error){
+            TempData["error"] = message.errorMessage;
+            return RedirectToAction("Forgotpage","Authenticate");
+        }
+
 
         return View();
     }
 
 
     [HttpPost]
-    public async Task<IActionResult> Resetpage(string password)
+    public async Task<IActionResult> Resetpage(string password,string Cnfpass)
     {
+        if(password != Cnfpass){
+            TempData["error"] = "The New password and confirm password are not matching";
+            return Json(new { success = false, message = "User's Password is Not Changed!" });
+        }
 
-        // Fetching email id from temp data
-        string email = TempData["user_email"].ToString();
+        string token = Request.Query["token"];
+
+        string email = _userauth.GetUserFromResetToken(token);
+
+        if(email == ""){
+            TempData["error"] = "There is an error in Updating reset token.";
+            return Json(new { success = false, message = "There is an error in Updating reset token." });
+        }
 
         bool result = _userauth.ResetPassService(email, password);
 

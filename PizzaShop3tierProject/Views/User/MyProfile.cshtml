@@ -34,6 +34,7 @@
                     <form class="col m-2" action="/User/MyProfile" method="post" enctype="multipart/form-data">
                     <input type="file" asp-for = "ProfileImage" class="d-none" accept="image/*" id="image-input"/>
                     <input type="hidden" value="@Html.DisplayFor(model => model.Email)" name="Email">
+                    <input type="hidden" asp-for="Imageurl">
                         <div class="row mb-3">
                             <div class="col">
                                 <div class="form-floating">

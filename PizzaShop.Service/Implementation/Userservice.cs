@@ -66,6 +66,28 @@ public class Userservice : IUserservice{
     }
 
     public bool EditUserService(Usertemp usertemp){
+         Message message = _repouser.IsRepeatedUsername(usertemp.Username,usertemp.Email);
+
+        if(message.error){
+            return false;
+        }
+        if(usertemp.UserImage != null){
+            
+            var fileName = Path.GetFileNameWithoutExtension(usertemp.UserImage.FileName);
+                var extension = Path.GetExtension(usertemp.UserImage.FileName);
+                var uniqueFileName = $"{fileName}_{Guid.NewGuid()}{extension}";
+
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UploadedImages");
+                var path = Path.Combine(uploadsFolder, uniqueFileName);
+                
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    usertemp.UserImage.CopyTo(fileStream);
+                }
+
+                // Save the relative path to the usertemp property
+                usertemp.Imageurl = $"UploadedImages/{uniqueFileName}";
+        }
         usertemp.Updatedat = DateTime.Now;
         bool result =_repouser.EditUser(usertemp);
         if(result){
@@ -94,13 +116,36 @@ public class Userservice : IUserservice{
         _repouser.DeleteUser(id);
     }
 
-    public bool AddUserService(NewUserModel userobj,string email){
+    public Message AddUserService(NewUserModel userobj,string email){
+        Message message = _repouser.IsRepeatedUsername(userobj.Username,email);
+
+        if(message.error){
+            message.errorMessage = "This Username or Email is repeated.";
+            return message;
+        }
+
         Userlogin usetemp = new Userlogin{Email = email};
         User addinguser = _repouser.GetUser(usetemp);
         userobj.Password = BCrypt.Net.BCrypt.HashPassword(userobj.Password);
         userobj.Createdby = addinguser.UserId;
         userobj.Updatedby = addinguser.UserId;
+        if(userobj.UserImage != null){
+            
+            var fileName = Path.GetFileNameWithoutExtension(userobj.UserImage.FileName);
+                var extension = Path.GetExtension(userobj.UserImage.FileName);
+                var uniqueFileName = $"{fileName}_{Guid.NewGuid()}{extension}";
 
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UploadedImages");
+                var path = Path.Combine(uploadsFolder, uniqueFileName);
+
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    userobj.UserImage.CopyTo(fileStream);
+                }
+
+                // Save the relative path to the usertemp property
+                userobj.Imageurl = $"UploadedImages/{uniqueFileName}";
+        }
         User newuser = new User{
             Firstname = userobj.Firstname,
             Lastname = userobj.Lastname,
@@ -119,12 +164,12 @@ public class Userservice : IUserservice{
             Password = userobj.Password
         };
 
-        bool result =_repouser.AddUser(newuser);
+        Message result =_repouser.AddUser(newuser);
 
-        if(!result){
-            return false;
+        if(result.error){
+            return result;
         }
-        return true;
+        return new Message{error = false};
     }
 
     public ProfileViewModel UpdateProfileService(ProfileViewModel usertemp){

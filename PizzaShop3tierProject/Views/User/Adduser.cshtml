@@ -14,7 +14,7 @@
                     </a>
                 </div>
                 <div class="add-user-form  m-2 p-2">
-                    <form class="w-100 col" action="/User/Adduser" method="post">
+                    <form class="w-100 col" action="/User/Adduser" method="post" enctype="multipart/form-data">
                         <div class="row mb-3">
                             <div class="col">
                                 <div class="form-floating">
@@ -63,14 +63,21 @@
                                 <p class="validation-msg">@Html.ValidationMessageFor(Model => Model.Password)</p>
                             </div>
                         </div>
-                        <div class="w-100 mb-3 d-flex flex-column " id="upload">
-                            <div class="d-flex flex-column align-items-center" id="upload-div">
-                            <div id="cloud-upload">
-                                <i class="fa fa-cloud-upload w-100 h-100" aria-hidden="true"></i>
-                            </div>
-                            <p class="upload-t">upload</p>
-                            </div>
-                            <input type="file" class="form-control w-100 h-100 p-0 " id="upload-in" asp-for="Imageurl" name="Imageurl" required/>
+                       <div class="row">
+                                    <p>Upload Image</p>
+                                    <div class="col">
+                                        <div class=" border-dashed rounded-1 text-center mb-3 mb-lg-0">
+                                            <input type="file" name="UserImage" id="UserImage" class="d-none">
+                                            <img src="~/images/Default_pfp.svg.png" alt="profile-pic"
+                                                id="UserImageShown" class="rounded-circle profile-info-pic m-2"
+                                                height="80">
+                                                <input type="hidden" asp-for="Imageurl">
+                                            <label for="file" role="button" id="User-Image-input" class="py-5 w-100">
+                                                Drag and
+                                                Drop or Browse Files</label>
+                                        </div>
+                                        <p class="validation-msg"></p>
+                                    </div>
                         </div>
                         <div class="row mb-3">
                             <div class="dropdown col">
@@ -130,7 +137,21 @@
                     e.preventDefault();
                     window.location="/User/Userslist";
                 })
+            $("#User-Image-input").on("click", () => {
+            $("#UserImage").click();
+        })
+        $("#UserImage").change(function (event) {
+            let file = event.target.files[0];
 
+            if (file) {
+                let reader = new FileReader();
+                reader.onload = function (e) {
+                    $("#UserImageShown").attr("src", e.target.result); // Set preview
+                };
+                reader.readAsDataURL(file);
+
+            }
+        });
         // Load countries
         $.ajax({
             url: `${apiBaseUrl}/countries`,

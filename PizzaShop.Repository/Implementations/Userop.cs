@@ -1,3 +1,4 @@
+using System.Reflection.Metadata;
 using Microsoft.EntityFrameworkCore;
 using PizzaShop.Repository.Data;
 using PizzaShop.Repository.Interfaces;
@@ -117,14 +118,46 @@ public class Userop : IUser{
         return  _context.Users.Include(u => u.Role).Where(u => (string.IsNullOrEmpty(searchval) || u.Username.Contains(searchval)) && u.Isdeleted == false);
     }
 
-    public bool AddUser(User userobj){
+    public Message AddUser(User userobj){
         try{
         _context.Add(userobj);
         _context.SaveChanges();
-        return true;
+        return new Message{error = false};
         }catch(Exception e){
-            return false;
+            return new Message {error = true , errorMessage = e.Message};
         }
     }
 
+    public Message SetTokenForResetPass(int userid,string token,DateTime ExpireTime){
+        try{
+            Resettoken resettoken = new Resettoken{UserId = userid,Token = token, Expiredat = ExpireTime};
+            _context.Add(resettoken);
+            _context.SaveChanges();
+            return new Message{error = false};
+        }catch(Exception e) {
+            return new Message{error = true, errorMessage = e.Message};
+        }
+    }
+
+    public Resettoken ValidateTokenForResetPass(string token){
+        try{
+            Resettoken resettoken = _context.Resettokens.FirstOrDefault(r => r.Token == token);
+            if(resettoken == null){
+                return new Resettoken{};
+            }
+            return resettoken;
+        }catch(Exception e){
+            return new Resettoken{};
+        }
+    }
+
+    public Message UpdateResetToken(Resettoken resettoken){
+        try{
+        resettoken.Isreseted = true;
+        _context.SaveChanges();
+        return new Message{error = false};
+        }catch(Exception e){
+            return new Message{error = true, errorMessage = e.Message};
+        }
+    }
 }

@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace PizzaShop.Repository.ViewModels;
 
@@ -51,7 +52,7 @@ public partial class NewUserModel
     [RegularExpression(@"^[0-9]{6}$")]
     public string Zipcode { get; set; }
 
- 
+   public IFormFile? UserImage{get; set;}
     public string? Imageurl { get; set; }
     public bool? Status { get; set; }
     public int? Createdby { get; set; }

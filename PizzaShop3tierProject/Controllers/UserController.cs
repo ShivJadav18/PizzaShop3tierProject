@@ -58,7 +58,7 @@ public class UserController:Controller{
     }
 
     [HttpPost]
-     [Authorize(Roles = "super admin")]
+    [Authorize(Roles = "super admin")]
     public IActionResult Edit(Usertemp usertemp){
 
         if(!ModelState.IsValid){
@@ -94,33 +94,34 @@ public class UserController:Controller{
     }
 
     [HttpPost]
-     [Authorize(Roles = "super admin")]
+    [Authorize(Roles = "super admin")]
     public IActionResult Adduser(NewUserModel userobj){
 
         if(!ModelState.IsValid){
             return View(userobj);
         }
-
+       string userPass = userobj.Password;
+        
         var token = Request.Cookies["jwtCookie"];
         var email = GetClaimValueHelper(token,ClaimTypes.Email);
 
         TempData["user_email"] = userobj.Email;
 
-       bool response = _userservice.AddUserService(userobj,email);
+       Message response = _userservice.AddUserService(userobj,email);
 
-       if(!response){
-        TempData["error"] = "There is some internal error.";
+       if(response.error){
+        TempData["error"] = response.errorMessage;
         return View();
        }
+         var baseUrl = $"{Request.Scheme}://{Request.Host}";
+        
+        Message result = _authenticate.SendEmailTONewUserService(userobj.Email,userobj.Username,baseUrl,userPass);
 
-        var baseUrl = $"{Request.Scheme}://{Request.Host}";
-
-        bool result = _authenticate.SendEmailForResetpass(userobj.Email,baseUrl);
-
-        if(!result){
-            TempData["error"] = "There is an some error in email sending.";
+        if(result.error){
+            TempData["error"] = result.errorMessage;
             return RedirectToAction("Userslist","User");
         }
+        
         TempData["success"] = "New User is successfully added.";
         return RedirectToAction("Userslist","User");
     }
@@ -186,7 +187,7 @@ public class UserController:Controller{
          var token = Request.Cookies["jwtCookie"];
         var email = GetClaimValueHelper(token,ClaimTypes.Email);
 
-        bool result = _authenticate.ResetPassService(email,Newpass,Currentpass);
+        bool result = _authenticate.ResetPassService(email,Newpass,true,Currentpass);
 
         if(result){
             TempData["success"] = "User's password successfully changed.";

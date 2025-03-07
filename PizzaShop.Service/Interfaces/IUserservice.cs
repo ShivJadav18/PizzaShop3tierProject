@@ -11,7 +11,7 @@ public interface IUserservice{
 
     public Userlistmodel GetUsersListService(Userlistmodel userslist);
 
-    public bool AddUserService(NewUserModel userobj,string email);
+    public Message AddUserService(NewUserModel userobj,string email);
 
     public Usertemp GetUsertemp(int id);
 

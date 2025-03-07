@@ -1,6 +1,9 @@
 @{
     ViewData["titel"] = "reset page";
     Layout = "~/Views/Shared/_LayoutForLogin.cshtml";
+    bool validResetToken = true;
+
+    string token = Context.Request.Query["token"];
 }
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -31,7 +34,7 @@
     <div class="mt-2 text-center">
         <a href="/Authenticate/Login">Back To Login</a>
     </div>
-    
+
 </form>
 <script>
     @* validating password and conf password *@
@@ -46,32 +49,25 @@
 
     @* console.log(pass); *@
     @* console.log(cnfpass); *@
-            if(pass == ""){
+            if (pass == "") {
                 $("#pass-msg").text("Please Enter New password.");
                 return;
             }
-            if(cnfpass == ""){
+            if (cnfpass == "") {
                 $("#cnf-msg").text("Please Enter confirm password.");
                 return;
             }
-            if (pass != cnfpass) {
-    @{
-        TempData["error"] = "New Password and Confirm Password is not matching.";
-    }
-    window.location.reload();
-            return;
-            }else{
-                if(!passwordPattern.test(pass)){
-
+            
+                if (!passwordPattern.test(pass)) {
                     $("#pass-msg").text("The password must contain 1 special character,1 number,1 small character,1 capital character and must be 8 character long.");
-                    TempData["error"] = "Your Entered Password is not strong."
-                    return ;
+                    return;
                 }
-                 $.ajax({
-                    url: "/Authenticate/Resetpage",
+                $.ajax({
+                    url: "/Authenticate/Resetpage/?token=@token",
                     type: "POST",
                     data: {
-                        password: pass
+                        password: pass,
+                        Cnfpass :cnfpass
                     },
                     success: (response) => {
                         if (response.success) {
@@ -83,13 +79,13 @@
                     error: () => {
                     }
                 });
-            }
+            
         })
-        $("#pass").on("input",() => {
-            $("#pass-msg").text("");
-        })
-        $("#conf-pass").on("input",() => {
-            $("#cnf-msg").text("");
-        })
+    $("#pass").on("input", () => {
+        $("#pass-msg").text("");
+    })
+    $("#conf-pass").on("input", () => {
+        $("#cnf-msg").text("");
+    })
 
 </script>

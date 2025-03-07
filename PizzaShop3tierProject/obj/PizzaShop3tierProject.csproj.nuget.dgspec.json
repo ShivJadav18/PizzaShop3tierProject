@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "D:\\PizzaShop3tierProject\\PizzaShop3tierProject\\PizzaShop3tierProject.csproj": {}
+    "d:\\PizzaShop3tierProject\\PizzaShop3tierProject\\PizzaShop3tierProject.csproj": {}
   },
   "projects": {
     "D:\\PizzaShop3tierProject\\PizzaShop.Repository\\PizzaShop.Repository.csproj": {
@@ -87,14 +87,14 @@
         }
       }
     },
-    "D:\\PizzaShop3tierProject\\PizzaShop.Service\\PizzaShop.Service.csproj": {
+    "d:\\PizzaShop3tierProject\\PizzaShop.Service\\PizzaShop.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\PizzaShop3tierProject\\PizzaShop.Service\\PizzaShop.Service.csproj",
+        "projectUniqueName": "d:\\PizzaShop3tierProject\\PizzaShop.Service\\PizzaShop.Service.csproj",
         "projectName": "PizzaShop.Service",
-        "projectPath": "D:\\PizzaShop3tierProject\\PizzaShop.Service\\PizzaShop.Service.csproj",
+        "projectPath": "d:\\PizzaShop3tierProject\\PizzaShop.Service\\PizzaShop.Service.csproj",
         "packagesPath": "C:\\Users\\pce65\\.nuget\\packages\\",
-        "outputPath": "D:\\PizzaShop3tierProject\\PizzaShop.Service\\obj\\",
+        "outputPath": "d:\\PizzaShop3tierProject\\PizzaShop.Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\pce65\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -162,14 +162,14 @@
         }
       }
     },
-    "D:\\PizzaShop3tierProject\\PizzaShop3tierProject\\PizzaShop3tierProject.csproj": {
+    "d:\\PizzaShop3tierProject\\PizzaShop3tierProject\\PizzaShop3tierProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\PizzaShop3tierProject\\PizzaShop3tierProject\\PizzaShop3tierProject.csproj",
+        "projectUniqueName": "d:\\PizzaShop3tierProject\\PizzaShop3tierProject\\PizzaShop3tierProject.csproj",
         "projectName": "PizzaShop3tierProject",
-        "projectPath": "D:\\PizzaShop3tierProject\\PizzaShop3tierProject\\PizzaShop3tierProject.csproj",
+        "projectPath": "d:\\PizzaShop3tierProject\\PizzaShop3tierProject\\PizzaShop3tierProject.csproj",
         "packagesPath": "C:\\Users\\pce65\\.nuget\\packages\\",
-        "outputPath": "D:\\PizzaShop3tierProject\\PizzaShop3tierProject\\obj\\",
+        "outputPath": "d:\\PizzaShop3tierProject\\PizzaShop3tierProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\pce65\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -187,8 +187,8 @@
               "D:\\PizzaShop3tierProject\\PizzaShop.Repository\\PizzaShop.Repository.csproj": {
                 "projectPath": "D:\\PizzaShop3tierProject\\PizzaShop.Repository\\PizzaShop.Repository.csproj"
               },
-              "D:\\PizzaShop3tierProject\\PizzaShop.Service\\PizzaShop.Service.csproj": {
-                "projectPath": "D:\\PizzaShop3tierProject\\PizzaShop.Service\\PizzaShop.Service.csproj"
+              "d:\\PizzaShop3tierProject\\PizzaShop.Service\\PizzaShop.Service.csproj": {
+                "projectPath": "d:\\PizzaShop3tierProject\\PizzaShop.Service\\PizzaShop.Service.csproj"
               }
             }
           }

@@ -12,10 +12,11 @@
         <a href="/Role/Roleselect" class="btn btn-nonprimary imp" id="Back"><i class="fa fa-angle-left m-1"
                 aria-hidden="true"></i>Back</a>
     </div>
-    <form class="permission-cls d-flex flex-column pl-2 mt-2" asp-action="Permission" asp-controller="Role" method="post">
+    <form class="permission-cls d-flex flex-column pl-2 mt-2" asp-action="Permission" asp-controller="Role"
+        method="post">
         <div class="form-floating m-3 w-25">
-            <input type="text" disabled class="form-control w-100 border border-primary" id="Rolename" placeholder="Role Name"
-                value="@RoleName">
+            <input type="text" disabled class="form-control w-100 border border-primary" id="Rolename"
+                placeholder="Role Name" value="@RoleName">
             <label for="Rolename">Role</label>
         </div>
         <div class="permission-content d-flex p-2">
@@ -33,47 +34,56 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @{int i=0;}
+                            @{
+                                int i = 0;
+                            }
                             @foreach (var permission in Model)
                             {
-                                <input type="hidden" value="@permission.PermissionId" name="permissions[@i].PermissionId"/>
-                                <input type="hidden" value="@permission.PermissionfieldId" name="permissions[@i].PermissionfieldId">
-                                <input type ="hidden" value="@permission.RoleId" name = "permissions[@i].RoleId">
-                                <input type="hidden" value="@permission.Createdat" name="permissions[@i].Createdat">                              
-                                <input type="hidden" value="@permission.Createdby" name="permissions[@i].Createdby">                              
+                                <input type="hidden" value="@permission.PermissionId" name="permissions[@i].PermissionId" />
+                                <input type="hidden" value="@permission.PermissionfieldId"
+                                    name="permissions[@i].PermissionfieldId">
+                                <input type="hidden" value="@permission.RoleId" name="permissions[@i].RoleId">
+                                <input type="hidden" value="@permission.Createdat" name="permissions[@i].Createdat">
+                                <input type="hidden" value="@permission.Createdby" name="permissions[@i].Createdby">
                                 <input type="hidden" value="false" name="permissions[@i].Isdeleted">
                                 <tr>
                                     <td>
                                         @{
-                                            if(!permission.Canadd && !permission.Candelete && !permission.Canview){
+                                            if (!permission.Canadd && !permission.Candelete && !permission.Canview)
+                                            {
                                                 <input class="form-check-input mainCheckbox" type="checkbox">
-                                            }else{
+                                            }
+                                            else
+                                            {
                                                 <input class="form-check-input mainCheckbox" type="checkbox" checked>
                                             }
                                         }
-                                        
+
                                     </td>
                                     <td>@permission.Permissionfield.Permissionfieldname</td>
                                     <td>
                                         <div class="form-check form-switch">
-                                            <input class="form-check-input toggle-checkbox " asp-for="@permission.Canview" name="permissions[@i].Canview" type="checkbox"
+                                            <input class="form-check-input toggle-checkbox canview"
+                                                asp-for="@permission.Canview" name="permissions[@i].Canview" type="checkbox"
                                                 role="switch" id="@permission.PermissionId" />
                                         </div>
                                     </td>
                                     <td>
                                         <div class="form-check form-switch">
-                                            <input class="form-check-input toggle-checkbox" asp-for="@permission.Canadd" name="permissions[@i].Canadd" type="checkbox"
+                                            <input class="form-check-input toggle-checkbox sub-toggle"
+                                                asp-for="@permission.Canadd" name="permissions[@i].Canadd" type="checkbox"
                                                 role="switch" id="@permission.PermissionId" />
                                         </div>
                                     </td>
                                     <td>
                                         <div class="form-check form-switch">
-                                            <input class="form-check-input toggle-checkbox" asp-for="@permission.Candelete" name="permissions[@i].Candelete" type="checkbox"
-                                                role="switch" id="@permission.PermissionId" />
+                                            <input class="form-check-input toggle-checkbox sub-toggle"
+                                                asp-for="@permission.Candelete" name="permissions[@i].Candelete"
+                                                type="checkbox" role="switch" id="@permission.PermissionId" />
                                         </div>
                                     </td>
                                 </tr>
-                              i++;
+                                i++;
                             }
                         </tbody>
                     </table>
@@ -87,7 +97,7 @@
                     Save
                 </button>
                 <a href="/Role/Roleselect" class="btn btn-nonprimary imp m-2 col-1">
-                    Cancle
+                    Cancel
                 </a>
             </div>
         </div>
@@ -95,21 +105,35 @@
 </div>
 <script>
 
-        function CheckboxUpdate(){
-            $(".mainCheckbox").each(function() {
-                if(!this.checked){
-                    $(this).closest('tr').find(".toggle-checkbox").prop("checked",false);
-                }
-                $(this).closest('tr').find(".toggle-checkbox").prop('disabled', !this.checked);
-            })
-        }
-        $(document).ready(() => {
-            CheckboxUpdate();
-            $(".mainCheckbox").change(function() {
-                if(!this.checked){
-                    $(this).closest('tr').find(".toggle-checkbox").prop("checked",false);
-                }
-                $(this).closest('tr').find(".toggle-checkbox").prop('disabled', !this.checked);
-            })
+    function CheckboxUpdate() {
+        $(".mainCheckbox").each(function () {
+            if (!this.checked) {
+                $(this).closest('tr').find(".toggle-checkbox").prop("checked", false);
+            }
+            $(this).closest('tr').find(".toggle-checkbox").prop('disabled', !this.checked);
         })
+    }
+    $(document).ready(() => {
+        CheckboxUpdate();
+        $(".mainCheckbox").change(function () {
+            if (!this.checked) {
+                $(this).closest('tr').find(".toggle-checkbox").prop("checked", false);
+                $(this).closest('tr').find(".toggle-checkbox").prop('disabled', !this.checked);
+            }else{
+                $(this).closest('tr').find(".canview").prop('disabled', !this.checked);
+            }
+        })
+        $(".canview").change(function () {
+
+            var row = $(this).closest("tr");
+            if ($(this).is(":checked")) {
+                row.find(".sub-toggle").prop("checked", false);
+                row.find(".sub-toggle").prop("disabled", false);
+            } else {
+                row.find(".sub-toggle").prop("checked", false);
+                row.find(".sub-toggle").prop("disabled", true);
+            }
+
+        })
+    })
 </script>

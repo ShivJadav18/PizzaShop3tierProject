@@ -7,8 +7,8 @@
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
-<div class="content w-100" id="content">
-                <div class="first-part d-flex justify-content-between">
+<div class="content w-100 ms-2" id="content">
+                <div class="first-part ms-2 d-flex justify-content-between">
                     <h2>Users</h2>
                     <form class="d-flex">
                         <div class="form-group m-1">
@@ -21,7 +21,7 @@
                     </form>
                 </div>
 
-                <div class="tbl m-2 d-flex flex-column" id="UserTable">
+                <div class="tbl m-2 p-2 d-flex flex-column table-responsive" id="UserTable">
                      @await Html.PartialAsync("_UserTable",Model)
                 </div>
 <script>
